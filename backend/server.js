@@ -52,3 +52,4 @@ mongoose.connect(
 //
 // ─── SET UP ROUTES ──────────────────────────────────────────────────────────────
 //
+app.use("/vehicle", require("./routes/vehicle.route"));
