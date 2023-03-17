@@ -27,8 +27,8 @@ app.use(cookieParser());
 /* Allowing the server to accept requests from the client. */
 app.use(
   cors({
-    origin: ["http://192.168.92.248:3000"],
-    credentials: true,
+    // origin: ["http://192.168.92.248:3000"],
+    // credentials: true,
   })
 );
 app.use(bodyParser.json());

@@ -6,7 +6,7 @@ router.post("/add", async (req, res) => {
     await Vehicle.findOne({ email: req.body.email });
 
     const newVehicle = new Vehicle({
-      user: req.body.user,
+      // user: req.body.user,
       make: req.body.make,
       model: req.body.model,
       plateNo: req.body.plateNo,
