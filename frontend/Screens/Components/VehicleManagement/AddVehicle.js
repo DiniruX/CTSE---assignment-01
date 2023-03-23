@@ -4,7 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { Card, Icon } from "@rneui/themed";
 import React from "react";
@@ -29,11 +29,7 @@ const AddVehicle = ({ navigation }) => {
   };
 
   const backButton = (e) => {
-    if (make !== "" || model !== "" || vehicleType !== "") {
-      setBackShow(true);
-    } else {
-      navigation.navigate("UserVehicles", {});
-    }
+    navigation.navigate("UserVehicles", {});
   };
 
   const register = async (e) => {
@@ -49,7 +45,10 @@ const AddVehicle = ({ navigation }) => {
           vehicleType,
           registered,
         };
-        const result = await axios.post("http://192.168.1.10:8000/vehicle/add", UserData);
+        const result = await axios.post(
+          "http://192.168.1.10:8000/vehicle/add",
+          UserData
+        );
 
         if (result?.status === 201) {
           // setSuccessShow(true);
@@ -211,8 +210,8 @@ const styles = StyleSheet.create({
     width: "40%",
     borderRadius: 25,
     marginLeft: 27,
-    marginTop:20,
-    marginBottom:130,
+    marginTop: 20,
+    marginBottom: 130,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
@@ -224,8 +223,8 @@ const styles = StyleSheet.create({
     width: "40%",
     borderRadius: 25,
     marginLeft: 20,
-    marginTop:20,
-    marginBottom:130,
+    marginTop: 20,
+    marginBottom: 130,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
