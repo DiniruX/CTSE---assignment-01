@@ -2,6 +2,7 @@ import { Icon } from "@rneui/themed";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
 import VehicleNavigationStack from "../Components/Vehicle";
+import RequestNavigationStack from "../Components/Request";
 
 const Tabs = () => {
   return (
@@ -43,9 +44,9 @@ const Tabs = () => {
           ),
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name=""
-        component={}
+        component={RequestNavigationStack}
         options={{
           tabBarIcon: ({ focused }) => (
             <Icon
@@ -55,7 +56,7 @@ const Tabs = () => {
             />
           ),
         }}
-      /> */}
+      />
       {/* <Tab.Screen
         name=""
         component={}

@@ -7,7 +7,7 @@ import AddRequest from "./RequestManagement/AddRequest";
 // import ViewStatus from "./RequestManagement/ViewStatus";
 // import RideSummary from "./RequestManagement/RideSummary";
 // import ViewRequestVehicleOwner from "./RequestManagement/ViewProposalVehicleOwner";
-import AuthContext from "../context/UserContext";
+import AuthContext from "../Context/UserContext";
 // import UpdateRequest from "./RequestManagement/UpdateRequest";
 
 export default function RequestNavigationStack() {
