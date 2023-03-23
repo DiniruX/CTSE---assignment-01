@@ -6,15 +6,18 @@ const requestSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    //person who add the requests
     passenger: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
-      required: true,
+      // required: true,
     },
+    //person who accept the requests
     vehicleOwner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
     },
+    //Thw vehicle details of the person who accept the requests
     vehicle: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "vehicle",
@@ -35,6 +38,7 @@ const requestSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    //status will change to accepted.
     status: {
       type: String,
       default: "Requested",
