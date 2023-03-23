@@ -44,9 +44,9 @@ const Tabs = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name=""
-        component={RequestNavigationStack}
+        component={}
         options={{
           tabBarIcon: ({ focused }) => (
             <Icon
@@ -56,7 +56,7 @@ const Tabs = () => {
             />
           ),
         }}
-      />
+      /> */}
       {/* <Tab.Screen
         name=""
         component={}
@@ -70,9 +70,9 @@ const Tabs = () => {
           ),
         }}
       /> */}
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Request"
-        component={}
+        component={RequestNavigationStack}
         options={{
           tabBarIcon: ({ focused }) => (
             <Icon
@@ -82,7 +82,7 @@ const Tabs = () => {
             />
           ),
         }}
-      /> */}
+      />
       {/* <Tab.Screen
         name="Vehicle"
         component={}
