@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// import RequestList from "./RequestManagement/RequestList";
+import RequestList from "./RequestManagement/RequestList";
 import AddRequest from "./RequestManagement/AddRequest";
 // import ViewRequestInfo from "./RequestManagement/ViewRequestInfo";
 // import ViewRequest from "./RequestManagement/ViewRequest";
@@ -34,7 +34,7 @@ export default function RequestNavigationStack() {
       )} */}
       {vehicleOwnerBlock === false ? (
         <>
-          {/* <Stack.Screen name="RequestList" component={RequestList} /> */}
+          <Stack.Screen name="RequestList" component={RequestList} />
           <Stack.Screen name="AddRequest" component={AddRequest} />
           {/* <Stack.Screen name="ViewRequestInfo" component={ViewRequestInfo} />
           <Stack.Screen name="ViewRequest" component={ViewRequest} />
