@@ -6,7 +6,8 @@ import AuthNavigationStack from "../Components/Auth";
 import AuthContext from "../Context/UserDetailsContext";
 import { useContext } from "react";
 import UserNavigationStack from "../Components/User";
-import { Text, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
+import UserListNavigationStack from "../Components/UserList";
 
 const Tabs = () => {
   const authContext = useContext(AuthContext);
@@ -52,6 +53,21 @@ const Tabs = () => {
               ),
             }}
           />
+          {authContext.userType == null ? (
+            <Tab.Screen
+              name="Admin"
+              component={UserListNavigationStack}
+              options={{
+                tabBarIcon: ({ focused }) => (
+                  <Icon
+                    name="directions-car"
+                    color={focused ? "white" : "red"}
+                    iconStyle={{ marginRight: 10, fontSize: 30 }}
+                  />
+                ),
+              }}
+            />
+          ) : null}
           <Tab.Screen
             name="User"
             component={UserNavigationStack}
@@ -80,10 +96,14 @@ const Tabs = () => {
                 <TouchableOpacity
                   onPress={() => {
                     onPress();
-                    authContext.setUserId(null);
+                    authContext.logout();
                   }}
                 >
-                  <Text>Logout</Text>
+                  <Icon
+                    name="code"
+                    color={"#000000"}
+                    iconStyle={{ margin: 20 }}
+                  />
                 </TouchableOpacity>
               ),
             }}
