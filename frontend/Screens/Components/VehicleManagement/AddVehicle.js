@@ -5,12 +5,14 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  Image,
 } from "react-native";
 import { Card, Icon } from "@rneui/themed";
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import CheckBox from "expo-checkbox";
+import imagePicker from "react-native-image-picker";
 
 const AddVehicle = ({ navigation }) => {
   const [make, setMake] = useState("");
@@ -26,6 +28,20 @@ const AddVehicle = ({ navigation }) => {
     setPlateNo("");
     setPassengers("");
     setVehicleType("");
+  };
+
+  const handleImgUpload = () => {
+    imagePicker.showImagePicker({maxWidth: 400, maxHeight: 400}, (response) => {
+      if (response.didCancel) {
+        return;
+      }
+
+      const img = {
+        uri: response.uri,
+        type: response.type,
+        name: response.fileName || response.uri.substring(response.uri.lastIndexOf("/") + 1)
+      }
+    });
   };
 
   const backButton = (e) => {
@@ -76,13 +92,15 @@ const AddVehicle = ({ navigation }) => {
       <Card.Divider color="black" style={{ height: 4 }} />
 
       <View style={styles.container}>
-
-      <View style={styles.row}>
+        <View style={styles.row}>
           <Text style={styles.label}>Photo of car</Text>
           <Text style={styles.required}>*</Text>
         </View>
         <View style={styles.imageContainer}>
-
+          <Image source={{ uri: "" }} style={styles.img} />
+          <TouchableOpacity onPress={handleImgUpload}>
+            <Icon name="add" color="black" iconStyle={styles.addIcon} />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.row}>
@@ -255,6 +273,10 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 3,
     borderRadius: 25,
-    height: 220
+    height: 220,
+  },
+  addIcon: {
+    marginTop:180,
+    marginLeft: 320,
   }
 });
