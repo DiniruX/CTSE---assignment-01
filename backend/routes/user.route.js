@@ -24,6 +24,8 @@ router.post("/register", async (req, res) => {
       lastName: req.body.lastName,
       email: req.body.email,
       mobile: req.body.mobile,
+      address: req.body.address,
+      userType: "User",
       passwordHash: passwordHash,
     });
 
@@ -42,19 +44,29 @@ router.post("/add", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 
+    /* Checking if the email is already in the database. */
+    if (user)
+      return res.status(400).json({
+        errorMessage: "An account with this email already exists.",
+      });
+
+    // hash the password
+    const salt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(req.body.password, salt);
+    
     const newUser = new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
       mobile: req.body.mobile,
-      dob: req.body.dob,
-      userType: req.body.userType,
+      address: req.body.address,
+      userType: "Admin",
       passwordHash: passwordHash,
     });
 
     await newUser.save();
 
-    res.status(201).send({ Message: "User added successfully." });
+    res.status(201).send({ Message: "Admin added successfully." });
   } catch (err) {
     console.error(err);
     res.status(500).send(err);
@@ -88,8 +100,8 @@ router.get("/getAll", async (req, res) => {
 router.put("/update/:id", async (req, res) => {
   try {
     /* Updating the user account. */
-    await User.findByIdAndUpdate(req.params.id, req.body).exec();
-
+    const user = await User.findByIdAndUpdate(req.params.id, req.body).exec();
+console.log(user);
     res.status(201).send({ Message: "Successfully updated the user." });
   } catch (err) {
     res.json(false);
@@ -115,9 +127,7 @@ router.delete("/delete/:id", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     /* Finding the user by email. */
-    console.log(req.body)
     const user = await User.findOne({ email: req.body.email });
-    console.log(user)
     if (!user) {
       return res.status(401).json({ errorMessage: "Wrong email or password." });
     }

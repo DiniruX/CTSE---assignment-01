@@ -1,17 +1,16 @@
 import { useState } from "react";
-
+import { Card, Icon } from "@rneui/themed";
 import {
+  ScrollView,
   StyleSheet,
   Text,
-  View,
   TextInput,
   TouchableOpacity,
-  ScrollView,
+  View,
 } from "react-native";
 import axios from "axios";
-import { Card } from "@rneui/themed";
 
-export default function Register() {
+export default function AddAdmin({ navigation }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,7 +19,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [passwordVerify, setPasswordVerify] = useState("");
 
-  const register = async (e) => {
+  const addAdmin = async (e) => {
     e.preventDefault();
     try {
       const RegisterData = {
@@ -33,19 +32,18 @@ export default function Register() {
       };
 
       const result = await axios.post(
-        "http://localhost:8000/user/register",
+        "http://localhost:8000/user/add",
         RegisterData
       );
+      console.log(result);
 
       if (result) {
         alert(result.data.Message);
-      navigation.navigate("Login", {});
-
+        navigation.navigate("UserList", {});
       }
     } catch (err) {
-      setLoading(false);
-      alert(err.response.data.errorMessage);
       console.log(err);
+      alert(err.response.data.errorMessage);
     }
   };
 
@@ -61,8 +59,12 @@ export default function Register() {
 
   return (
     <ScrollView style={{ top: 20 }}>
-      <Text style={styles.header}>Travel Buddy</Text>
-      <Text style={styles.header2}>Register</Text>
+      <View style={styles.row}>
+        <TouchableOpacity onPress={() => navigation.navigate("UserList")}>
+          <Icon name="chevron-left" color="black" iconStyle={styles.icon} />
+        </TouchableOpacity>
+        <Text style={styles.header}>Add Admin</Text>
+      </View>
 
       <Card.Divider color="black" style={{ height: 4 }} />
 
@@ -153,13 +155,14 @@ export default function Register() {
           secureTextEntry={true}
           onChangeText={(passwordVerify) => setPasswordVerify(passwordVerify)}
         />
+        <Card.Divider color="black" style={{ height: 4, marginTop: 20 }} />
 
         <View style={styles.row}>
           <TouchableOpacity style={styles.resetBtn} onPress={resetForm}>
             <Text style={styles.resetText}>Reset</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.addBtn} onPress={register}>
-            <Text style={styles.addText}>Register</Text>
+          <TouchableOpacity style={styles.addBtn} onPress={addAdmin}>
+            <Text style={styles.addText}>Add admin</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -177,26 +180,19 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   header: {
-    fontSize: 60,
+    fontSize: 50,
     fontWeight: "bold",
     alignItems: "center",
-    marginLeft: 20,
-  },
-  header2: {
-    fontSize: 30,
-    fontWeight: "bold",
-    marginBottom: 10,
-    alignItems: "center",
-    marginLeft: 150,
+    marginLeft: 60,
   },
   container: {
-    backgroundColor: "grey",
+    backgroundColor: "#D5BEFF",
     marginLeft: 10,
     marginRight: 10,
     borderWidth: 1,
-    borderColor: "#D3D3D3",
+    borderColor: "black",
     borderRadius: 25,
-    height: "71%",
+    height: "89%",
   },
   label: {
     fontWeight: "bold",
@@ -232,21 +228,19 @@ const styles = StyleSheet.create({
     width: "40%",
     borderRadius: 25,
     marginLeft: 27,
-    marginTop: 20,
-    marginBottom: 130,
+    marginBottom: 125,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#ffffff",
     borderWidth: 3,
-    borderColor: "#D3D3D3",
+    borderColor: "black",
   },
   addBtn: {
     width: "40%",
     borderRadius: 25,
     marginLeft: 20,
-    marginTop: 20,
-    marginBottom: 130,
+    marginBottom: 125,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
