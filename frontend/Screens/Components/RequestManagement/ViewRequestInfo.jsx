@@ -106,10 +106,10 @@ export default function ViewRequestInfo({ navigation, route }) {
               marginTop: 30,
             }}
           />
-          <Text style={styles.text1}>
+          {/* <Text style={styles.text1}>
             {route.params.request.passenger.firstName}{" "}
             {route.params.request.passenger.lastName}
-          </Text>
+          </Text> */}
         </View>
 
         <View style={styles.container2}>

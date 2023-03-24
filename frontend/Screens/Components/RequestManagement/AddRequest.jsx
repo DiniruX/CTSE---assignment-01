@@ -41,12 +41,14 @@ export default function AddRequest({ navigation }) {
     setSeats(1);
   }
 
+  //if set count is not 1 then seat - 1. initial value is 1.
   function handleMinus() {
     if (seats !== 1) {
       setSeats(seats - 1);
     }
   }
 
+  //maximum seat count is 5.
   function handlePlus() {
     if (seats < 5) {
       setSeats(seats + 1);
