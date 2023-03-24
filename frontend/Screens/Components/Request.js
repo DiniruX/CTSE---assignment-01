@@ -36,7 +36,7 @@ export default function RequestNavigationStack() {
         <>
           <Stack.Screen name="RequestList" component={RequestList} />
           <Stack.Screen name="AddRequest" component={AddRequest} />
-          {/* <Stack.Screen name="ViewRequestInfo" component={ViewRequestInfo} /> */}
+          <Stack.Screen name="ViewRequestInfo" component={ViewRequestInfo} />
           {/* <Stack.Screen name="ViewRequest" component={ViewRequest} /> */}
           {/* <Stack.Screen name="ViewStatus" component={ViewStatus} /> */}
           <Stack.Screen name="UpdateRequest" component={UpdateRequest} />
