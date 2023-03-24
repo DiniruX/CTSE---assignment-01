@@ -5,7 +5,7 @@ const AuthContext = createContext();
 function AuthContextProvider(props) {
   /* Setting the state of the component. */
   const [userType, setUserType] = useState(null);
-  const [userId, setUserId] = useState("636608378b984d338dde3d4a");
+  const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState("Chathuni");
   const [vehicleOwnerBlock, setVehicleOwnerBlock] = useState(false);
 
