@@ -16,7 +16,7 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState("");
 
   const authContext = useContext(AuthContext);
-  const { setUserId } = authContext;
+  const { setUserId, setUser } = authContext;
 
   const login = async (e) => {
     e.preventDefault();
@@ -31,9 +31,11 @@ const Login = ({ navigation }) => {
         loginData
       );
 
+      console.log(result.data);
+      console.log(result.data.type);
       if (result) {
         setUserId(result.data.userId);
-        console.log(authContext.userId);
+        setUserType(result.data.type);
         navigation.navigate("Your Vehicles", {});
       }
     } catch (err) {
@@ -70,20 +72,20 @@ const Login = ({ navigation }) => {
       </View>
 
       <TouchableOpacity style={styles.loginBtn} onPress={login}>
-        <Text style={styles.loginText}>LOGIN</Text>
+        <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 
       <TouchableOpacity>
         <Text
           style={{
-            color: "#bb8de0",
             textAlign: "center",
             fontSize: 16,
             fontWeight: "bold",
+            marginBottom: 20,
           }}
           onPress={() => navigation.navigate("Register", {})}
         >
-          Need Account ? Register now
+          Need an Account ? Click to Register now
         </Text>
       </TouchableOpacity>
     </View>
@@ -98,12 +100,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     elevation: 20,
     borderRadius: 10,
+    backgroundColor: "#D5BEFF",
+    borderWidth: 1,
+    borderColor: "black",
     alignItems: "center",
     justifyContent: "center",
   },
 
   header: {
-    fontSize: 60,
+    fontSize: 57,
     fontWeight: "bold",
     alignItems: "center",
   },
@@ -129,17 +134,25 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     elevation: 20,
     borderColor: "#f2bc57",
-    borderRadius: 10,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: "black",
     width: "80%",
     height: 45,
     marginBottom: 20,
   },
 
   TextInput: {
+    fontSize: 16,
     height: 50,
     flex: 1,
     padding: 10,
-    marginLeft: 20,
+    borderRadius: 15,
+  },
+
+  loginText: {
+    fontSize: 16,
+    fontWeight: "bold",
   },
 
   loginBtn: {
@@ -150,6 +163,9 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 25,
+    borderWidth: 1,
+    borderColor: "black",
     backgroundColor: "#bb8de0",
   },
 });

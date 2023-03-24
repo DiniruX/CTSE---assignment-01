@@ -15,35 +15,27 @@ export default function Register() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [dob, setDob] = useState("");
   const [mobile, setMobile] = useState("");
-  const [userType, setUserType] = useState("");
+  const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVerify, setPasswordVerify] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const register = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-
       const RegisterData = {
         firstName: firstName,
         lastName: lastName,
         email: email,
-        dob: dob,
         mobile: mobile,
-        userType: userType,
+        address: address,
         password: password,
       };
-
-      console.log(RegisterData);
 
       const result = await axios.post(
         "http://localhost:8000/user/register",
         RegisterData
       );
-      console.log(result);
 
       if (result) {
         alert(result.data.Message);
@@ -61,9 +53,8 @@ export default function Register() {
     setFirstName("");
     setLastName("");
     setEmail("");
-    setDob("");
     setMobile("");
-    setUserType("");
+    setAddress("");
     setPassword("");
     setPasswordVerify("");
   };
@@ -125,6 +116,18 @@ export default function Register() {
           maxLength={10}
           placeholder="Mobile Number"
           onChangeText={(mobile) => setMobile(mobile.replace(/[^0-9]/g, ""))}
+        />
+
+        <View style={styles.row}>
+          <Text style={styles.label}>Address</Text>
+          <Text style={styles.required}>*</Text>
+        </View>
+        <TextInput
+          value={address}
+          style={styles.TextInput}
+          required
+          placeholder="Address"
+          onChangeText={(address) => setAddress(address)}
         />
 
         <View style={styles.row}>
