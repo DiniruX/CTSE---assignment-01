@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// import Login from "./UserManagement/auth/Login";
-import Login from "./UserManagement/UserProfile";
+import Login from "./UserManagement/auth/Login";
+// import Login from "./UserManagement/UserProfile";
 import Register from "./UserManagement/auth/Register";
 
 const AuthNavigationStack = () => {
