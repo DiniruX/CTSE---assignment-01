@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  Modal,
+  TextInput,
 } from "react-native";
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { Card, Icon } from "@rneui/themed";
@@ -13,14 +15,30 @@ import axios from "axios";
 
 const UserVehicles = ({ navigation }) => {
   const [vehicles, setVehicles] = useState([]);
+  const [plateNo, setPlateNo] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [updatedMake, setUpdatedMake] = useState("");
+  const [updatedType, setUpdatedType] = useState("");
+  const [updatedModel, setUpdatedModel] = useState("");
+
   const counterRef = useRef(0);
 
   const isFocused = useIsFocused();
 
-  const getVehicles = async () => {
+  const handleUpdatePress = (vehicle) => {
+    setSelectedItem(vehicle);
+    setUpdatedMake(vehicle.make);
+    setUpdatedType(vehicle.vehicleType);
+    setUpdatedModel(vehicle.model);
+    setPlateNo(vehicle.plateNo);
+    setModalVisible(true);
+  };
+
+  const getVehicles = async (_id) => {
     try {
       const result = await axios.get(
-        `http://192.168.1.10:8000/vehicle/getByUser/6414cb436a4a2f51409b1efc`
+        `http://192.168.1.10:8000/vehicle/getByUser/${_id}`
       );
       /* Setting the state of the notes and totalPage variables. */
       setVehicles(result?.data);
@@ -36,13 +54,42 @@ const UserVehicles = ({ navigation }) => {
           `http://192.168.1.10:8000/vehicle/delete/${_id}`
         );
         alert("Vehicle deleted successfully!");
-        
       } catch (error) {
         console.log(error);
-        alert("Error deleting vehicle!")
+        alert("Error deleting vehicle!");
       }
     }
     counterRef.current.forceUpdate();
+  };
+
+  const update = async (_id) => {
+    if (_id) {
+      try {
+        /* Creating an object with the same name as the variables. */
+        const UserData = {
+          // user: userId,
+          updatedMake,
+          updatedModel,
+          plateNo,
+          updatedType,
+        };
+
+        const result = await axios.put(
+          `http://192.168.1.10:8000/vehicle/update/${_id}`,
+          UserData
+        );
+
+        if (result?.status === 201) {
+          alert("Vehicle updated successfully!");
+          setModalVisible(false);
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Error updating vehicle!");
+      }
+    } else {
+      alert("Error updating vehicle!");
+    }
   };
 
   useEffect(() => {
@@ -60,7 +107,7 @@ const UserVehicles = ({ navigation }) => {
   return (
     <View style={{ top: 50, bottom: 20 }}>
       <View style={styles.row}>
-        <Text style={styles.TextTitle}>Add New Vehicle</Text>
+        <Text style={styles.TextTitle}>Your vehicles</Text>
       </View>
 
       <Card.Divider color="black" style={{ height: 4 }} />
@@ -75,22 +122,81 @@ const UserVehicles = ({ navigation }) => {
                 }}
                 style={styles.image}
               />
-              <Text style={styles.title}>{vehicle.make} {vehicle.model}</Text>
+              <Text style={styles.title}>
+                {vehicle.make} {vehicle.model}
+              </Text>
               <Text style={styles.textLine}>
-                No. of passengers: {vehicle.passengers} | Type: {vehicle.vehicleType}
+                No. of passengers: {vehicle.passengers} | Type:{" "}
+                {vehicle.vehicleType}
               </Text>
               <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity onPress={onUpdate} style={styles.updateBtn}>
+                <TouchableOpacity
+                  onPress={() => handleUpdatePress(vehicle)}
+                  style={styles.updateBtn}
+                >
                   <Text style={styles.updateBtnText}>Update</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={((e) => deleteVehicle(vehicle._id))} style={styles.deleteBtn}>
+                <TouchableOpacity
+                  onPress={(e) => deleteVehicle(vehicle._id)}
+                  style={styles.deleteBtn}
+                >
                   <Text style={styles.deleteBtnText}>Delete</Text>
                 </TouchableOpacity>
               </View>
+              <Modal
+                visible={modalVisible}
+                onRequestClose={() => setModalVisible(false)}
+              >
+                <View style={styles.modalContainer}>
+                  <Text style={styles.label}>Make</Text>
+                  <TextInput
+                    value={updatedMake}
+                    onChangeText={(text) => setUpdatedMake(text)}
+                    style={styles.TextInput}
+                  />
+
+                  <Text style={styles.label}>Model</Text>
+                  <TextInput
+                    value={updatedModel}
+                    onChangeText={(text) => setUpdatedModel(text)}
+                    style={styles.TextInput}
+                  />
+
+                  <Text style={styles.label}>Type</Text>
+                  <TextInput
+                    value={updatedType}
+                    onChangeText={(text) => setUpdatedType(text)}
+                    style={styles.TextInput}
+                  />
+
+                  <Text style={styles.label}>Plate number</Text>
+                  <TextInput
+                    value={plateNo}
+                    onChangeText={(text) => setPlateNo(text)}
+                    style={styles.TextInput}
+                  />
+
+                  <View style={styles.row}>
+                    <TouchableOpacity
+                      style={styles.resetBtn}
+                      onPress={(e) => update(vehicle._id)}
+                    >
+                      <Text style={styles.resetText}>Update</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.addBtn}
+                      onPress={() => setModalVisible(false)}
+                    >
+                      <Text style={styles.addText}>Cancel</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </Modal>
             </View>
           );
         })}
       </ScrollView>
+
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("AddVehicle", {})}
@@ -199,5 +305,74 @@ const styles = StyleSheet.create({
   TextTitle: {
     marginLeft: 10,
     fontSize: 20,
+  },
+  modal: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "grey",
+    justifyContent: "left",
+    // alignItems: 'center',
+  },
+  TextInput: {
+    height: 50,
+    padding: 10,
+    borderWidth: 3,
+    fontSize: 18,
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 10,
+    borderColor: "black",
+    backgroundColor: "white",
+  },
+  resetBtn: {
+    width: "40%",
+    borderRadius: 25,
+    marginLeft: 27,
+    marginTop: 20,
+    marginBottom: 130,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#ffffff",
+    borderWidth: 3,
+    borderColor: "#D3D3D3",
+  },
+  addBtn: {
+    width: "40%",
+    borderRadius: 25,
+    marginLeft: 20,
+    marginTop: 20,
+    marginBottom: 130,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+  },
+  resetText: {
+    color: "black",
+    fontSize: 20,
+  },
+  addText: {
+    color: "white",
+    fontSize: 20,
+  },
+  modalContainer: {
+    backgroundColor: "grey",
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 70,
+    borderWidth: 1,
+    borderColor: "#D3D3D3",
+    borderRadius: 25,
+    height: "80%",
+  },
+  label: {
+    fontWeight: "bold",
+    fontSize: 20,
+    marginTop: 30,
+    marginLeft: 15,
   },
 });
