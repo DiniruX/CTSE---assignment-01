@@ -13,7 +13,7 @@ const VehicleSchema = new mongoose.Schema(
     modelHide: { type: Boolean, default: false },
     plateNo: { type: String },
     plateNoHide: { type: Boolean, default: false },
-    passengers: { type: Number },
+    passengers: { type: String },
     passengersHide: { type: Boolean, default: false },
     registered: { type: Boolean, default: false },
     registeredHide: { type: Boolean, default: false },
