@@ -46,7 +46,7 @@ const Tabs = () => {
               tabBarIcon: ({ focused }) => (
                 <Icon
                   name="directions-car"
-                  color={focused ? "white" : "red"}
+                  color={focused ? "black" : "red"}
                   iconStyle={{ marginRight: 10, fontSize: 30 }}
                 />
               ),
@@ -58,8 +58,8 @@ const Tabs = () => {
             options={{
               tabBarIcon: ({ focused }) => (
                 <Icon
-                  name="directions-car"
-                  color={focused ? "white" : "red"}
+                  name="person"
+                  color={focused ? "black" : "red"}
                   iconStyle={{ marginRight: 10, fontSize: 30 }}
                 />
               ),
