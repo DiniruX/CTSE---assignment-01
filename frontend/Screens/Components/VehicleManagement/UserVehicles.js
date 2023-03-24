@@ -47,6 +47,21 @@ const UserVehicles = ({ navigation }) => {
     }
   };
 
+  const deleteVehicle = async (_id) => {
+    if (_id) {
+      try {
+        const result = await axios.delete(
+          `http://192.168.1.10:8000/vehicle/delete/${_id}`
+        );
+        alert("Vehicle deleted successfully!");
+      } catch (error) {
+        console.log(error);
+        alert("Error deleting vehicle!");
+      }
+    }
+    counterRef.current.forceUpdate();
+  };
+
   const update = async (_id) => {
     if (_id) {
       try {
@@ -81,19 +96,12 @@ const UserVehicles = ({ navigation }) => {
     getVehicles();
   }, [isFocused]);
 
-  const deleteVehicle = async (_id) => {
-    if (_id) {
-      try {
-        const result = await axios.delete(
-          `http://192.168.1.10:8000/vehicle/delete/${_id}`
-        );
-        alert("Vehicle deleted successfully!");
-      } catch (error) {
-        console.log(error);
-        alert("Error deleting vehicle!");
-      }
-    }
-    counterRef.current.forceUpdate();
+  const onUpdate = () => {
+    // console.log("Update");
+  };
+
+  const onDelete = () => {
+    // console.log("Delete");
   };
 
   return (
@@ -123,7 +131,7 @@ const UserVehicles = ({ navigation }) => {
               </Text>
               <View style={{ flexDirection: "row" }}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("UpdateVehicle", vehicle)}
+                  onPress={() => handleUpdatePress(vehicle)}
                   style={styles.updateBtn}
                 >
                   <Text style={styles.updateBtnText}>Update</Text>
@@ -135,6 +143,55 @@ const UserVehicles = ({ navigation }) => {
                   <Text style={styles.deleteBtnText}>Delete</Text>
                 </TouchableOpacity>
               </View>
+              <Modal
+                visible={modalVisible}
+                onRequestClose={() => setModalVisible(false)}
+              >
+                <View style={styles.modalContainer}>
+                  <Text style={styles.label}>Make</Text>
+                  <TextInput
+                    value={updatedMake}
+                    onChangeText={(text) => setUpdatedMake(text)}
+                    style={styles.TextInput}
+                  />
+
+                  <Text style={styles.label}>Model</Text>
+                  <TextInput
+                    value={updatedModel}
+                    onChangeText={(text) => setUpdatedModel(text)}
+                    style={styles.TextInput}
+                  />
+
+                  <Text style={styles.label}>Type</Text>
+                  <TextInput
+                    value={updatedType}
+                    onChangeText={(text) => setUpdatedType(text)}
+                    style={styles.TextInput}
+                  />
+
+                  <Text style={styles.label}>Plate number</Text>
+                  <TextInput
+                    value={plateNo}
+                    onChangeText={(text) => setPlateNo(text)}
+                    style={styles.TextInput}
+                  />
+
+                  <View style={styles.row}>
+                    <TouchableOpacity
+                      style={styles.resetBtn}
+                      onPress={(e) => update(vehicle._id)}
+                    >
+                      <Text style={styles.resetText}>Update</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.addBtn}
+                      onPress={() => setModalVisible(false)}
+                    >
+                      <Text style={styles.addText}>Cancel</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </Modal>
             </View>
           );
         })}
