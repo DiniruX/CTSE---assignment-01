@@ -82,31 +82,31 @@ router.get("/getAll", async (req, res) => {
 });
 
 /* Get Ride By Id */
-// router.get("/ride/:id", async (req, res) => {
-//   try {
-//     const result = await Request.find({ _id: req.params.id })
-//       .populate("passenger")
-//       .populate("vehicleOwner")
-//       .populate("vehicle");
-//     res.status(200).send(result);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send(err);
-//   }
-// });
+router.get("/ride/:id", async (req, res) => {
+  try {
+    const result = await Request.find({ _id: req.params.id })
+      .populate("passenger")
+      .populate("vehicleOwner")
+      .populate("vehicle");
+    res.status(200).send(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+});
 
 /* Get Ride By Id */
-// router.get("/ride/:id", async (req, res) => {
-//   try {
-//     const result = await Request.find({ _id: req.params.id })
-//       .populate("passenger")
-//       .populate("vehicleOwner")
-//       .populate("vehicle");
-//     res.status(200).send(result);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send(err);
-//   }
-// });
+router.get("/ride/:id", async (req, res) => {
+  try {
+    const result = await Request.find({ _id: req.params.id })
+      .populate("passenger")
+      .populate("vehicleOwner")
+      .populate("vehicle");
+    res.status(200).send(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+});
 
 module.exports = router;

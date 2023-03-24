@@ -2,11 +2,11 @@ import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RequestList from "./RequestManagement/RequestList";
 import AddRequest from "./RequestManagement/AddRequest";
-// import ViewRequestInfo from "./RequestManagement/ViewRequestInfo";
-// import ViewRequest from "./RequestManagement/ViewRequest";
-// import ViewStatus from "./RequestManagement/ViewStatus";
-// import RideSummary from "./RequestManagement/RideSummary";
-// import ViewRequestVehicleOwner from "./RequestManagement/ViewProposalVehicleOwner";
+import ViewRequestInfo from "./RequestManagement/ViewRequestInfo";
+import ViewRequest from "./RequestManagement/ViewRequest";
+import ViewStatus from "./RequestManagement/ViewStatus";
+import RideSummary from "./RequestManagement/RideSummary";
+import ViewRequestVehicleOwner from "./RequestManagement/ViewProposalVehicleOwner";
 import AuthContext from "../Context/UserContext";
 import UpdateRequest from "./RequestManagement/UpdateRequest";
 
@@ -21,7 +21,7 @@ export default function RequestNavigationStack() {
         headerShown: false,
       }}
     >
-      {/* {vehicleOwnerBlock === true ? (
+      {vehicleOwnerBlock === true ? (
         <>
           <Stack.Screen
             name="ViewRequestVehicleOwner"
@@ -31,7 +31,7 @@ export default function RequestNavigationStack() {
         </>
       ) : (
         <></>
-      )} */}
+      )}
       {vehicleOwnerBlock === false ? (
         <>
           <Stack.Screen name="RequestList" component={RequestList} />
@@ -40,11 +40,11 @@ export default function RequestNavigationStack() {
           <Stack.Screen name="ViewRequest" component={ViewRequest} />
           <Stack.Screen name="ViewStatus" component={ViewStatus} />
           <Stack.Screen name="UpdateRequest" component={UpdateRequest} />
-          {/* <Stack.Screen name="RideSummary" component={RideSummary} /> */}
-          {/* <Stack.Screen
+          <Stack.Screen name="RideSummary" component={RideSummary} />
+          <Stack.Screen
             name="ViewRequestVehicleOwner"
             component={ViewRequestVehicleOwner}
-          /> */}
+          />
         </>
       ) : (
         <></>

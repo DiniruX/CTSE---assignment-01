@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import axios from "axios";
 import { BASE_URL } from "../constants/Url.json";
-import AuthContext from "../../context/UserContext";
+import AuthContext from "../../Context/UserContext";
 import CustomAlert from "../customAlert/CustomAlert";
 import DropDownPicker from "react-native-dropdown-picker";
 
