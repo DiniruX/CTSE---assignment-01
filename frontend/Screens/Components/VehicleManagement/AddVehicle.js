@@ -76,6 +76,15 @@ const AddVehicle = ({ navigation }) => {
       <Card.Divider color="black" style={{ height: 4 }} />
 
       <View style={styles.container}>
+
+      <View style={styles.row}>
+          <Text style={styles.label}>Photo of car</Text>
+          <Text style={styles.required}>*</Text>
+        </View>
+        <View style={styles.imageContainer}>
+
+        </View>
+
         <View style={styles.row}>
           <Text style={styles.label}>Make</Text>
           <Text style={styles.required}>*</Text>
@@ -238,4 +247,14 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
   },
+  imageContainer: {
+    backgroundColor: "white",
+    marginLeft: 10,
+    marginRight: 10,
+    borderWidth: 1,
+    borderColor: "black",
+    borderWidth: 3,
+    borderRadius: 25,
+    height: 220
+  }
 });
