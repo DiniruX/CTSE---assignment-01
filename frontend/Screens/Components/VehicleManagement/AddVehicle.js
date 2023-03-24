@@ -12,7 +12,6 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import CheckBox from "expo-checkbox";
-import imagePicker from "react-native-image-picker";
 
 const AddVehicle = ({ navigation }) => {
   const [make, setMake] = useState("");
@@ -31,17 +30,17 @@ const AddVehicle = ({ navigation }) => {
   };
 
   const handleImgUpload = () => {
-    imagePicker.showImagePicker({maxWidth: 400, maxHeight: 400}, (response) => {
-      if (response.didCancel) {
-        return;
-      }
+    // imagePicker.showImagePicker({maxWidth: 400, maxHeight: 400}, (response) => {
+    //   if (response.didCancel) {
+    //     return;
+    //   }
 
-      const img = {
-        uri: response.uri,
-        type: response.type,
-        name: response.fileName || response.uri.substring(response.uri.lastIndexOf("/") + 1)
-      }
-    });
+    //   const img = {
+    //     uri: response.uri,
+    //     type: response.type,
+    //     name: response.fileName || response.uri.substring(response.uri.lastIndexOf("/") + 1)
+    //   }
+    // });
   };
 
   const backButton = (e) => {
