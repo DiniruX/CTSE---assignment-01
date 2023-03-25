@@ -6,13 +6,14 @@ import {
   Text,
   TouchableOpacity,
   View,
+  TextInput,
 } from "react-native";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
-// import SearchBar from "react-native-dynamic-search-bar";
 
 export default function ViewAllUser({ navigation }) {
   const [users, setUsers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const isFocused = useIsFocused();
 
   async function getUserData() {
@@ -33,6 +34,14 @@ export default function ViewAllUser({ navigation }) {
     getUserData();
   }, [isFocused]);
 
+  const filteredUsers = users.filter(
+    (user) =>
+      user.firstName.toLowerCase().includes(searchQuery?.toLowerCase()) ||
+      user.lastName.toLowerCase().includes(searchQuery?.toLowerCase()) ||
+      user.address.toLowerCase().includes(searchQuery?.toLowerCase()) ||
+      user.userType.toLowerCase().includes(searchQuery?.toLowerCase())
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -46,6 +55,14 @@ export default function ViewAllUser({ navigation }) {
         </TouchableOpacity>
       </View>
       <Card.Divider color="black" style={{ height: 4 }} />
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.TextInput}
+          placeholder="Search"
+          value={searchQuery}
+          onChangeText={(query) => setSearchQuery(query)}
+        />
+      </View>
       <ScrollView
         style={{
           height: "70%",
@@ -54,7 +71,7 @@ export default function ViewAllUser({ navigation }) {
           borderRadius: 25,
         }}
       >
-        {users.map((user, i) => {
+        {filteredUsers.map((user, i) => {
           return (
             <TouchableOpacity
               key={i}
@@ -97,6 +114,26 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     height: "90%",
     padding: 0,
+  },
+  inputView: {
+    backgroundColor: "white",
+    elevation: 20,
+    borderColor: "#f2bc57",
+    borderRadius: 15,
+    borderWidth: 1,
+    marginLeft: 40,
+    borderColor: "black",
+    width: "80%",
+    height: 45,
+    marginBottom: 20,
+  },
+
+  TextInput: {
+    fontSize: 16,
+    height: 50,
+    flex: 1,
+    padding: 10,
+    borderRadius: 15,
   },
   row: {
     flexDirection: "row",
