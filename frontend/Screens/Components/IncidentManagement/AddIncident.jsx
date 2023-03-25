@@ -3,7 +3,7 @@ import { Card, Icon } from "@rneui/themed";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, DropDown } from "react-native";
 import { BASE_URL } from "../constants/Url.json";
 import axios from "axios";
-import AuthContext from "../../context/UserContext";
+//import AuthContext from "../../context/UserContext";
 import CheckBox from "expo-checkbox";
 import DropDownPicker from 'react-native-dropdown-picker';
    
