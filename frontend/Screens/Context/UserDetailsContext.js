@@ -5,16 +5,17 @@ const AuthContext = createContext();
 function AuthContextProvider(props) {
   /* Setting the state of the component. */
   const [userType, setUserType] = useState(null);
-  const [userId, setUserId] = useState("636608378b984d338dde3d4a");
-  const [userName, setUserName] = useState("Chathuni");
-  const [vehicleOwnerBlock, setVehicleOwnerBlock] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [userName, setUserName] = useState(null);
 
   function setType(type) {
     setUserType(type);
   }
 
   function logout() {
+    setUserId(null);
     setUserType(null);
+    setUserName(null);
   }
 
   // ────────────────────────────────────────────────────────────────────────────────
@@ -26,12 +27,10 @@ function AuthContextProvider(props) {
         userId,
         userType,
         userName,
-        vehicleOwnerBlock,
         setType,
         setUserId,
         setUserName,
         logout,
-        setVehicleOwnerBlock,
       }}
     >
       {props.children}

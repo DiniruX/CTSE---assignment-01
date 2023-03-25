@@ -4,7 +4,8 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  ScrollView
+  ScrollView,
+  Image,
 } from "react-native";
 import { Card, Icon } from "@rneui/themed";
 import React from "react";
@@ -28,12 +29,22 @@ const AddVehicle = ({ navigation }) => {
     setVehicleType("");
   };
 
+  const handleImgUpload = () => {
+    // imagePicker.showImagePicker({maxWidth: 400, maxHeight: 400}, (response) => {
+    //   if (response.didCancel) {
+    //     return;
+    //   }
+
+    //   const img = {
+    //     uri: response.uri,
+    //     type: response.type,
+    //     name: response.fileName || response.uri.substring(response.uri.lastIndexOf("/") + 1)
+    //   }
+    // });
+  };
+
   const backButton = (e) => {
-    if (make !== "" || model !== "" || vehicleType !== "") {
-      setBackShow(true);
-    } else {
-      navigation.navigate("UserVehicles", {});
-    }
+    navigation.navigate("UserVehicles", {});
   };
 
   const register = async (e) => {
@@ -49,7 +60,10 @@ const AddVehicle = ({ navigation }) => {
           vehicleType,
           registered,
         };
-        const result = await axios.post("http://192.168.1.10:8000/vehicle/add", UserData);
+        const result = await axios.post(
+          "http://192.168.1.10:8000/vehicle/add",
+          UserData
+        );
 
         if (result?.status === 201) {
           // setSuccessShow(true);
@@ -66,7 +80,7 @@ const AddVehicle = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={{ top: 50 }}>
+    <ScrollView style={{ top: 30 }}>
       <View style={styles.row}>
         <TouchableOpacity onPress={() => backButton()}>
           <Icon name="chevron-left" color="black" iconStyle={styles.icon} />
@@ -77,6 +91,17 @@ const AddVehicle = ({ navigation }) => {
       <Card.Divider color="black" style={{ height: 4 }} />
 
       <View style={styles.container}>
+        <View style={styles.row}>
+          <Text style={styles.label}>Photo of the car</Text>
+          <Text style={styles.required}>*</Text>
+        </View>
+        <View style={styles.imageContainer}>
+          <Image source={{ uri: "" }} style={styles.img} />
+          <TouchableOpacity onPress={handleImgUpload}>
+            <Icon name="add" color="black" iconStyle={styles.addIcon} />
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.row}>
           <Text style={styles.label}>Make</Text>
           <Text style={styles.required}>*</Text>
@@ -211,8 +236,8 @@ const styles = StyleSheet.create({
     width: "40%",
     borderRadius: 25,
     marginLeft: 27,
-    marginTop:20,
-    marginBottom:130,
+    marginTop: 20,
+    marginBottom: 130,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
@@ -224,8 +249,8 @@ const styles = StyleSheet.create({
     width: "40%",
     borderRadius: 25,
     marginLeft: 20,
-    marginTop:20,
-    marginBottom:130,
+    marginTop: 20,
+    marginBottom: 130,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
@@ -238,5 +263,19 @@ const styles = StyleSheet.create({
   addText: {
     color: "white",
     fontSize: 20,
+  },
+  imageContainer: {
+    backgroundColor: "white",
+    marginLeft: 10,
+    marginRight: 10,
+    borderWidth: 1,
+    borderColor: "black",
+    borderWidth: 3,
+    borderRadius: 25,
+    height: 220,
+  },
+  addIcon: {
+    marginTop: 180,
+    marginLeft: 320,
   },
 });

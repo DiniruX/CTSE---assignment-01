@@ -72,7 +72,16 @@ export default function CustomAlert({
             </View>
 
             {displayMode == "confirm" ? (
-              <View style={styles.row}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  fontSize: 22,
+                  marginTop: 15,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+              >
                 <TouchableOpacity
                   activeOpacity={0.9}
                   onPress={() => confirmAlert(false)}
@@ -122,31 +131,18 @@ const styles = StyleSheet.create({
     height: "40%",
     width: "90%",
     borderWidth: 1,
-    borderColor: "#8B51F5",
+    borderColor: "black",
     borderRadius: 7,
     elevation: 10,
-  },
-  label: {
-    fontWeight: "bold",
-    fontSize: 20,
-    marginTop: 10,
-    marginLeft: 15,
-  },
-  required: {
-    fontWeight: "bold",
-    color: "red",
-    fontSize: 20,
-    marginTop: 10,
-    marginLeft: 2,
   },
   checkBox: {
     marginTop: 10,
     marginLeft: 15,
     borderWidth: 3,
-    borderColor: "#8B51F5",
+    borderColor: "black",
   },
   noBtn: {
-    width: "40%",
+    width: "200%",
     borderRadius: 25,
     marginRight: 20,
     marginTop: 20,
@@ -155,10 +151,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#ffffff",
     borderWidth: 3,
-    borderColor: "#8B51F5",
+    borderColor: "black",
   },
   yesBtn: {
-    width: "40%",
+    width: "200%",
     borderRadius: 25,
     marginTop: 20,
     height: 50,
@@ -191,7 +187,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     borderRadius: 10,
-    borderColor: "#8B51F5",
+    borderColor: "black",
     backgroundColor: "white",
   },
 });
