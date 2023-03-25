@@ -60,8 +60,8 @@ const Tabs = () => {
               options={{
                 tabBarIcon: ({ focused }) => (
                   <Icon
-                    name="directions-car"
-                    color={focused ? "white" : "red"}
+                    name="people"
+                    color={focused ? "black" : "red"}
                     iconStyle={{ marginRight: 10, fontSize: 30 }}
                   />
                 ),
@@ -74,7 +74,7 @@ const Tabs = () => {
             options={{
               tabBarIcon: ({ focused }) => (
                 <Icon
-                  name="person"
+                  name="group-add"
                   color={focused ? "black" : "red"}
                   iconStyle={{ marginRight: 10, fontSize: 30 }}
                 />
@@ -88,7 +88,7 @@ const Tabs = () => {
               tabBarIcon: ({ focused }) => (
                 <Icon
                   name="directions-car"
-                  color={focused ? "white" : "red"}
+                  color={focused ? "black" : "red"}
                   iconStyle={{ marginRight: 10, fontSize: 30 }}
                 />
               ),
@@ -101,7 +101,7 @@ const Tabs = () => {
                 >
                   <Icon
                     name="code"
-                    color={"#000000"}
+                    color={onPress ? "black" : "red"}
                     iconStyle={{ margin: 20 }}
                   />
                 </TouchableOpacity>
@@ -117,7 +117,7 @@ const Tabs = () => {
             tabBarIcon: ({ focused }) => (
               <Icon
                 name="code"
-                color={focused ? "#000000" : "#585858"}
+                color={focused ? "black" : "red"}
                 iconStyle={{ marginRight: 10 }}
               />
             ),

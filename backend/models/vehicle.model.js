@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const VehicleSchema = new mongoose.Schema(
   {
-    // user: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "user",
-    //   required: true,
-    // },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "userId",
+      required: true,
+    },
     make: { type: String },
     makeHide: { type: Boolean, default: false },
     model: { type: String },
