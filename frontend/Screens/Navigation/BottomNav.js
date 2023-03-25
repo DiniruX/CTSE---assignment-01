@@ -47,7 +47,7 @@ const Tabs = () => {
               tabBarIcon: ({ focused }) => (
                 <Icon
                   name="directions-car"
-                  color={focused ? "black" : "red"}
+                  color={focused ? "red" : "black"}
                   iconStyle={{ marginRight: 10, fontSize: 30 }}
                 />
               ),
@@ -61,7 +61,7 @@ const Tabs = () => {
                 tabBarIcon: ({ focused }) => (
                   <Icon
                     name="people"
-                    color={focused ? "black" : "red"}
+                    color={focused ? "red" : "black"}
                     iconStyle={{ marginRight: 10, fontSize: 30 }}
                   />
                 ),
@@ -75,7 +75,7 @@ const Tabs = () => {
               tabBarIcon: ({ focused }) => (
                 <Icon
                   name="group-add"
-                  color={focused ? "black" : "red"}
+                  color={focused ? "red" : "black"}
                   iconStyle={{ marginRight: 10, fontSize: 30 }}
                 />
               ),
@@ -88,7 +88,7 @@ const Tabs = () => {
               tabBarIcon: ({ focused }) => (
                 <Icon
                   name="directions-car"
-                  color={focused ? "black" : "red"}
+                  color={focused ? "red" : "black"}
                   iconStyle={{ marginRight: 10, fontSize: 30 }}
                 />
               ),
@@ -100,7 +100,7 @@ const Tabs = () => {
                   }}
                 >
                   <Icon
-                    name="code"
+                    name="logout"
                     color={onPress ? "black" : "red"}
                     iconStyle={{ margin: 20 }}
                   />
@@ -116,7 +116,7 @@ const Tabs = () => {
           options={{
             tabBarIcon: ({ focused }) => (
               <Icon
-                name="code"
+                name="login"
                 color={focused ? "black" : "red"}
                 iconStyle={{ marginRight: 10 }}
               />

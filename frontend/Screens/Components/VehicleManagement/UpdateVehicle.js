@@ -58,7 +58,7 @@ const UpdateVehicle = ({ navigation, route }) => {
           passengers,
           vehicleType,
         };
-        const result = await axios.put(`http://192.168.238.253:8000/vehicle/update/${route.params._id}`, vehicleData);
+        const result = await axios.put(`http://172.28.2.183:8000/vehicle/update/${route.params._id}`, vehicleData);
 
         if (result?.status === 201) {
           // setSuccessShow(true);

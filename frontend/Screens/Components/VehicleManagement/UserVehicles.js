@@ -39,7 +39,7 @@ const UserVehicles = ({ navigation }) => {
     console.log(userId);
     try {
       const result = await axios.get(
-        `http://192.168.238.253:8000/vehicle/getByUser/${userId}` 
+        `http://172.28.2.183:8000/vehicle/getByUser/${userId}` 
       );
       /* Setting the state of the notes and totalPage variables. */
       setVehicles(result?.data);
@@ -61,7 +61,7 @@ const UserVehicles = ({ navigation }) => {
         };
 
         const result = await axios.put(
-          `http://192.168.238.253:8000/vehicle/update/${_id}`,
+          `http://172.28.2.183:8000/vehicle/update/${_id}`,
           UserData
         );
 
@@ -86,7 +86,7 @@ const UserVehicles = ({ navigation }) => {
     if (_id) {
       try {
         const result = await axios.delete(
-          `http://192.168.238.253:8000/vehicle/delete/${_id}`
+          `http://172.28.2.183:8000/vehicle/delete/${_id}`
         );
         alert("Vehicle deleted successfully!");
       } catch (error) {
