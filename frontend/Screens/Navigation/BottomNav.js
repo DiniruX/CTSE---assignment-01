@@ -53,7 +53,7 @@ const Tabs = () => {
               ),
             }}
           />
-          {authContext.userType == null ? (
+          {authContext.userType == "Admin" ? (
             <Tab.Screen
               name="Admin"
               component={UserListNavigationStack}
