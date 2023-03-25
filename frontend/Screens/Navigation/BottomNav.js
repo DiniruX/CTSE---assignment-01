@@ -8,6 +8,8 @@ import { useContext } from "react";
 import UserNavigationStack from "../Components/User";
 import { TouchableOpacity } from "react-native";
 import UserListNavigationStack from "../Components/UserList";
+import RequestNavigationStack from "../Components/Incident";
+
 
 const Tabs = () => {
   const authContext = useContext(AuthContext);
@@ -82,6 +84,19 @@ const Tabs = () => {
             }}
           />
           <Tab.Screen
+            name="Incident"
+            component={RequestNavigationStack}
+            options={{
+            tabBarIcon: ({ focused }) => (
+              <Icon
+                name="warning"
+                color={focused ? "#000000" : "#585858"}
+                iconStyle={{ marginRight: 10 }}
+              />
+            ),
+            }}
+          />
+          <Tab.Screen
             name="Logout"
             component={UserNavigationStack}
             options={{
@@ -125,6 +140,7 @@ const Tabs = () => {
         />
       )}
     </Tab.Navigator>
+
   );
 };
 
