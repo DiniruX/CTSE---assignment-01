@@ -1,12 +1,11 @@
 import { useContext, useState } from "react";
 import { Card, Icon } from "@rneui/themed";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, DropDown } from "react-native";
-import { BASE_URL } from "../constants/Url.json";
 import axios from "axios";
 //import AuthContext from "../../context/UserContext";
 import CheckBox from "expo-checkbox";
 import DropDownPicker from 'react-native-dropdown-picker';
-   
+
 
 export default function AddIncident({ navigation }) {
     const [incident, setIncident] = useState("");
@@ -33,7 +32,7 @@ export default function AddIncident({ navigation }) {
         "passenger" : userId,
     }
     axios({
-        url:BASE_URL + "/incident/new",
+        url:"http://172.28.6.79:8000/incident/new",
         method:"POST",
         data : data,
         headers : {
