@@ -10,7 +10,6 @@ import {
     Modal
 } from "react-native";
 import axios from "axios";
-import { BASE_URL } from "../constants/Url.json";
 
 const Incident = () => {
     const [list, setList] = useState([]);
@@ -36,7 +35,7 @@ axios({
             "incident" : incident
         }
         axios({
-            url:"http://192.168.125.248:8000/incident/new",
+            url:"http://172.28.6.79:8000/incident/new",
             method:"POST",
             data : data,
             headers : {
@@ -66,7 +65,7 @@ axios({
             "incident" : incident
         }
         axios({
-            url:"http://192.168.125.248:8000/incident/update/636ae3df7a2c620b602e3143",
+            url:"http://172.28.6.79:8000/incident/update/636ae3df7a2c620b602e3143",
             method:"PATCH",
             data : data,
             headers : {

@@ -10,7 +10,6 @@ import { CardList } from "react-native-card-list";
 import { deldata } from "./context/ContextProvider";
 import { Text, Card, Button, Icon } from "@rneui/themed";
 import SearchBar from "react-native-dynamic-search-bar";
-import { BASE_URL } from "../constants/Url.json";
 
 function ViewAllIncidents({ navigation }) {
     const [getincidentdata, setIncidentdata] = useState([]);
@@ -41,7 +40,7 @@ function ViewAllIncidents({ navigation }) {
     }, []);
 
     const deleteincident = async (id) => {
-        const res2 = await fetch(BASE_URL + `/incident/delete/${id}`, {
+        const res2 = await fetch(`http://172.28.6.79:8000/incident/delete/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

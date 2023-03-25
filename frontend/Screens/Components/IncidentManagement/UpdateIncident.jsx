@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Card, Icon } from "@rneui/themed";
 import { StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
-import { updatedata } from "./context/ContextProvider";
-import { BASE_URL } from "../constants/Url.json";
 import axios from "axios";
 import DropDownPicker from 'react-native-dropdown-picker';
 
@@ -10,11 +8,11 @@ export default function UpdateIncident({ navigation }) {
 
   
 
-   const [incident, setIncident] = useState("");
-   const [id, setId] = useState("");
-   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
+    const [incident, setIncident] = useState("");
+    const [id, setId] = useState("");
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [items, setItems] = useState([
     {label: 'Lose a Phone', value: 'Loseing a Phone'},
     {label: 'Lose a Wallet', value: 'Loseing a Wallet'},
     {label: 'Lose a Bag', value: 'Loseing a Bag'},
@@ -31,8 +29,8 @@ const handleEdit = (item) => {
       "id": _id
   }
   axios({
-      url:BASE_URL + `/incident/update/${id}`,
-      method:"PATCH",
+      url:`http://172.28.6.79:8000/incident/update/${id}`,
+      method:"PUT",
       data : data,
       headers : {
           "Content-Type" : "application/json"
@@ -54,7 +52,7 @@ const handleEdit = (item) => {
   // const { id } = useParams("");
 
   const getdata = async () => {
-    const res = await fetch(BASE_URL + `/incident/view/${id}`, {
+    const res = await fetch(`http://172.28.6.79:8000/incident/view/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
