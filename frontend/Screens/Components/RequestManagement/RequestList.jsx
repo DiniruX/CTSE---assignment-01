@@ -120,10 +120,16 @@ export default function RequestList({ navigation }) {
                           " " +
                           element.passenger.lastName}
                       </Text> */}
-                      <Text style={styles.text2}>{element.locationFrom}</Text>
-                      <Text style={styles.text2}>{element.locationTo}</Text>
+                      <Text style={styles.text2}>
+                        Location From {element.locationFrom}
+                      </Text>
+                      <Text style={styles.text2}>
+                        Location to {element.locationTo}
+                      </Text>
                       <Text style={styles.text2}>{element.dateAndTime}</Text>
-                      <Text style={styles.text2}>{element.noOfSeats}</Text>
+                      <Text style={styles.text2}>
+                        No of seats {element.noOfSeats}
+                      </Text>
                     </View>
                   </View>
                 </View>
