@@ -12,16 +12,28 @@ import axios from "axios";
 import { Card } from "@rneui/themed";
 
 export default function Register() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [address, setAddress] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordVerify, setPasswordVerify] = useState("");
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [mobile, setMobile] = useState(null);
+  const [address, setAddress] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [passwordVerify, setPasswordVerify] = useState(null);
 
   const register = async (e) => {
     e.preventDefault();
+    if (
+      firstName == null ||
+      lastName == null ||
+      email == null ||
+      mobile == null ||
+      address == null ||
+      password == null ||
+      passwordVerify == null
+    ) {
+      alert("Please fill all fields");
+      return;
+    }
     try {
       const RegisterData = {
         firstName: firstName,
@@ -39,11 +51,9 @@ export default function Register() {
 
       if (result) {
         alert(result.data.Message);
-      navigation.navigate("Login", {});
-
+        navigation.navigate("Login", {});
       }
     } catch (err) {
-      setLoading(false);
       alert(err.response.data.errorMessage);
       console.log(err);
     }
@@ -190,7 +200,7 @@ const styles = StyleSheet.create({
     marginLeft: 150,
   },
   container: {
-    backgroundColor: "grey",
+    backgroundColor: "#D5BEFF",
     marginLeft: 10,
     marginRight: 10,
     borderWidth: 1,
@@ -233,7 +243,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginLeft: 27,
     marginTop: 20,
-    marginBottom: 130,
+    marginBottom: 140,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
@@ -246,7 +256,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginLeft: 20,
     marginTop: 20,
-    marginBottom: 130,
+    marginBottom: 140,
     height: 50,
     alignItems: "center",
     justifyContent: "center",

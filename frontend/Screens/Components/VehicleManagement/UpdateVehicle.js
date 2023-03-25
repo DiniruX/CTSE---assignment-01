@@ -37,6 +37,18 @@ const UpdateVehicle = ({ navigation, route }) => {
 
   const update = async (e) => {
     if (e) {
+       if (
+         firstName == null ||
+         lastName == null ||
+         email == null ||
+         mobile == null ||
+         address == null ||
+         password == null ||
+         passwordVerify == null
+       ) {
+         alert("Please fill all fields");
+         return;
+       }
       try {
         /* Creating an object with the same name as the variables. */
         const vehicleData = {

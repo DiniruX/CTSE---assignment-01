@@ -21,6 +21,18 @@ export default function AddAdmin({ navigation }) {
 
   const addAdmin = async (e) => {
     e.preventDefault();
+     if (
+       firstName == null ||
+       lastName == null ||
+       email == null ||
+       mobile == null ||
+       address == null ||
+       password == null ||
+       passwordVerify == null
+     ) {
+       alert("Please fill all fields");
+       return;
+     }
     try {
       const RegisterData = {
         firstName: firstName,
