@@ -2,8 +2,16 @@ import { Icon } from "@rneui/themed";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
 import VehicleNavigationStack from "../Components/Vehicle";
+import AuthNavigationStack from "../Components/Auth";
+import AuthContext from "../Context/UserDetailsContext";
+import { useContext } from "react";
+import UserNavigationStack from "../Components/User";
+import { TouchableOpacity } from "react-native";
+import UserListNavigationStack from "../Components/UserList";
 
 const Tabs = () => {
+  const authContext = useContext(AuthContext);
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -17,7 +25,7 @@ const Tabs = () => {
           left: 0,
           right: 0,
           elevation: 10,
-          backgroundColor: "black",
+          backgroundColor: "white",
           borderTopWidth: 2,
           borderLeftWidth: 2,
           borderRightWidth: 2,
@@ -30,97 +38,92 @@ const Tabs = () => {
         },
       }}
     >
-      <Tab.Screen
-        name="Your Vehicles"
-        component={VehicleNavigationStack}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Icon
-              name="directions-car"
-              color={focused ? "white" : "red"}
-              iconStyle={{ marginRight: 10, fontSize: 30 }}
+      {authContext.userId != null ? (
+        <>
+          <Tab.Screen
+            name="Your Vehicles"
+            component={VehicleNavigationStack}
+            options={{
+              tabBarIcon: ({ focused }) => (
+                <Icon
+                  name="directions-car"
+                  color={focused ? "black" : "red"}
+                  iconStyle={{ marginRight: 10, fontSize: 30 }}
+                />
+              ),
+            }}
+          />
+          {authContext.userType == null ? (
+            <Tab.Screen
+              name="Admin"
+              component={UserListNavigationStack}
+              options={{
+                tabBarIcon: ({ focused }) => (
+                  <Icon
+                    name="directions-car"
+                    color={focused ? "white" : "red"}
+                    iconStyle={{ marginRight: 10, fontSize: 30 }}
+                  />
+                ),
+              }}
             />
-          ),
-        }}
-      />
-      {/* <Tab.Screen
-        name=""
-        component={}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Icon
-              name="code"
-              color={focused ? "#000000" : "#585858"}
-              iconStyle={{ marginRight: 10 }}
-            />
-          ),
-        }}
-      /> */}
-      {/* <Tab.Screen
-        name=""
-        component={}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Icon
-              name="home"
-              color={focused ? "#000000" : "#585858"}
-              iconStyle={{ marginRight: 10 }}
-            />
-          ),
-        }}
-      /> */}
-      {/* <Tab.Screen
-        name="Request"
-        component={}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Icon
-              name="collections-bookmark"
-              color={focused ? "#000000" : "#585858"}
-              iconStyle={{ marginRight: 10 }}
-            />
-          ),
-        }}
-      /> */}
-      {/* <Tab.Screen
-        name="Vehicle"
-        component={}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Icon
-              name="directions-car"
-              color={focused ? "#000000" : "#585858"}
-              iconStyle={{ marginRight: 10 }}
-            />
-          ),
-        }}
-      /> */}
-      {/* <Tab.Screen
-        name="Incident"
-        component={}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Icon
-              name="warning"
-              color={focused ? "#000000" : "#585858"}
-              iconStyle={{ marginRight: 10 }}
-            />
-          ),
-        }}
-      /> */}
-      {/* <Tab.Screen
-        name="Profile"
-        component={}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Icon
-              name="person"
-              color={focused ? "#000000" : "#585858"}
-              iconStyle={{ marginRight: 10 }}
-            />
-          ),
-        }}
-      /> */}
+          ) : null}
+          <Tab.Screen
+            name="User"
+            component={UserNavigationStack}
+            options={{
+              tabBarIcon: ({ focused }) => (
+                <Icon
+                  name="person"
+                  color={focused ? "black" : "red"}
+                  iconStyle={{ marginRight: 10, fontSize: 30 }}
+                />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Logout"
+            component={UserNavigationStack}
+            options={{
+              tabBarIcon: ({ focused }) => (
+                <Icon
+                  name="directions-car"
+                  color={focused ? "white" : "red"}
+                  iconStyle={{ marginRight: 10, fontSize: 30 }}
+                />
+              ),
+              tabBarButton: ({ onPress }) => (
+                <TouchableOpacity
+                  onPress={() => {
+                    onPress();
+                    authContext.logout();
+                  }}
+                >
+                  <Icon
+                    name="code"
+                    color={"#000000"}
+                    iconStyle={{ margin: 20 }}
+                  />
+                </TouchableOpacity>
+              ),
+            }}
+          />
+        </>
+      ) : (
+        <Tab.Screen
+          name="Auth"
+          component={AuthNavigationStack}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <Icon
+                name="code"
+                color={focused ? "#000000" : "#585858"}
+                iconStyle={{ marginRight: 10 }}
+              />
+            ),
+          }}
+        />
+      )}
     </Tab.Navigator>
   );
 };

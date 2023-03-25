@@ -12,20 +12,19 @@ import axios from "axios";
 import { useState } from "react";
 import CheckBox from "expo-checkbox";
 
-const UpdateVehicle = ({ navigation }) => {
-  const [make, setMake] = useState("");
-  const [model, setModel] = useState("");
-  const [plateNo, setPlateNo] = useState("");
-  const [passengers, setPassengers] = useState("");
-  const [vehicleType, setVehicleType] = useState("");
-  const [registered, setRegistered] = useState(false);
+const UpdateVehicle = ({ navigation, route }) => {
+  const [make, setMake] = useState(route.params.make);
+  const [model, setModel] = useState(route.params.model);
+  const [plateNo, setPlateNo] = useState(route.params.plateNo);
+  const [passengers, setPassengers] = useState(route.params.passengers);
+  const [vehicleType, setVehicleType] = useState(route.params.vehicleType);
 
   const resetForm = () => {
-    setMake("");
-    setModel("");
-    setPlateNo("");
-    setPassengers("");
-    setVehicleType("");
+    setMake(route.params.make);
+    setModel(route.params.model);
+    setPlateNo(route.params.plateNo);
+    setPassengers(route.params.passengers);
+    setVehicleType(route.params.vehicleType);
   };
 
   const backButton = (e) => {
@@ -36,20 +35,19 @@ const UpdateVehicle = ({ navigation }) => {
     }
   };
 
-  const register = async (e) => {
+  const update = async (e) => {
     if (e) {
       try {
         /* Creating an object with the same name as the variables. */
-        const UserData = {
+        const vehicleData = {
           // user: userId,
           make,
           model,
           plateNo,
           passengers,
           vehicleType,
-          registered,
         };
-        const result = await axios.post("http://192.168.1.10:8000/vehicle/add", UserData);
+        const result = await axios.put(`http://192.168.1.10:8000/vehicle/update/${route.params._id}`, vehicleData);
 
         if (result?.status === 201) {
           // setSuccessShow(true);
@@ -71,7 +69,7 @@ const UpdateVehicle = ({ navigation }) => {
         <TouchableOpacity onPress={() => backButton()}>
           <Icon name="chevron-left" color="black" iconStyle={styles.icon} />
         </TouchableOpacity>
-        <Text style={styles.TextTitle}>Add New Vehicle</Text>
+        <Text style={styles.TextTitle}>Update vehicle details</Text>
       </View>
 
       <Card.Divider color="black" style={{ height: 4 }} />
@@ -131,21 +129,11 @@ const UpdateVehicle = ({ navigation }) => {
         />
 
         <View style={styles.row}>
-          <CheckBox
-            disabled={false}
-            style={styles.checkBox}
-            value={registered}
-            onValueChange={(e) => setRegistered(e)}
-          />
-          <Text style={styles.label}>Vehicle Registered in SLIIT</Text>
-        </View>
-
-        <View style={styles.row}>
           <TouchableOpacity style={styles.resetBtn} onPress={resetForm}>
             <Text style={styles.resetText}>Reset</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.addBtn} onPress={register}>
-            <Text style={styles.addText}>Add</Text>
+          <TouchableOpacity style={styles.addBtn} onPress={update}>
+            <Text style={styles.addText}>Update</Text>
           </TouchableOpacity>
         </View>
       </View>
