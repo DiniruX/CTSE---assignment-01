@@ -12,15 +12,15 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { Card, Icon } from "@rneui/themed";
 import { useIsFocused } from "@react-navigation/native";
 import axios from "axios";
+import AuthContext from "../../Context/UserDetailsContext";
 
 const UserVehicles = ({ navigation }) => {
   const [vehicles, setVehicles] = useState([]);
   const [plateNo, setPlateNo] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
   const [updatedMake, setUpdatedMake] = useState("");
   const [updatedType, setUpdatedType] = useState("");
   const [updatedModel, setUpdatedModel] = useState("");
+  const { userId, userName } = useContext(AuthContext);
 
   const counterRef = useRef(0);
 
@@ -35,10 +35,11 @@ const UserVehicles = ({ navigation }) => {
     setModalVisible(true);
   };
 
-  const getVehicles = async (_id) => {
+  const getVehicles = async () => {
+    console.log(userId);
     try {
       const result = await axios.get(
-        `http://192.168.1.10:8000/vehicle/getByUser/${_id}`
+        `http://192.168.238.253:8000/vehicle/getByUser/${userId}` 
       );
       /* Setting the state of the notes and totalPage variables. */
       setVehicles(result?.data);
@@ -60,7 +61,7 @@ const UserVehicles = ({ navigation }) => {
         };
 
         const result = await axios.put(
-          `http://192.168.1.10:8000/vehicle/update/${_id}`,
+          `http://192.168.238.253:8000/vehicle/update/${_id}`,
           UserData
         );
 
@@ -85,7 +86,7 @@ const UserVehicles = ({ navigation }) => {
     if (_id) {
       try {
         const result = await axios.delete(
-          `http://192.168.1.10:8000/vehicle/delete/${_id}`
+          `http://192.168.238.253:8000/vehicle/delete/${_id}`
         );
         alert("Vehicle deleted successfully!");
       } catch (error) {
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: 2,
     borderColor: "#D3D3D3",
-    backgroundColor: "grey",
+    backgroundColor: "#D5BEFF",
     borderRadius: 25,
     width: "95%",
     marginBottom: 10,
