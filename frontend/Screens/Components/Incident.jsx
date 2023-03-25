@@ -2,12 +2,12 @@ import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AddIncident from "./IncidentManagement/AddIncident";
 import UpdateIncident from "./IncidentManagement/UpdateIncident";
-import ViewIncident from "./IncidentManagement/viewIncident";
+import ViewIncident from "./IncidentManagement/ViewIncident";
 import ViewAllIncidents from "./IncidentManagement/viewAllIncidents";
 import AddAction from "./IncidentManagement/addAction";
 import UpdateAction from "./IncidentManagement/updateAction";
 import Incident from "./IncidentManagement/Incident";
-//import ViewReport from "./IncidentManagement/ViewReport";
+import ViewReport from "./IncidentManagement/ViewReport";
 
 export default function RequestNavigationStack() {
   const Stack = createNativeStackNavigator();
