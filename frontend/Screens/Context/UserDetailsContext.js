@@ -8,10 +8,6 @@ function AuthContextProvider(props) {
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
 
-  function setType(type) {
-    setUserType(type);
-  }
-
   function logout() {
     setUserId(null);
     setUserType(null);
@@ -27,7 +23,7 @@ function AuthContextProvider(props) {
         userId,
         userType,
         userName,
-        setType,
+        setUserType,
         setUserId,
         setUserName,
         logout,

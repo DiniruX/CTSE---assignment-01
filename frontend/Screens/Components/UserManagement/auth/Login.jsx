@@ -17,7 +17,6 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState("");
 
   const authContext = useContext(AuthContext);
-  const { setUserId, setUser } = authContext;
 
   const login = async (e) => {
     e.preventDefault();
@@ -35,8 +34,8 @@ const Login = ({ navigation }) => {
       console.log(result.data);
       console.log(result.data.type);
       if (result) {
-        setUserId(result.data.userId);
-        setUserType(result.data.type);
+        authContext.setUserId(result.data.userId);
+        authContext.setUserType(result.data.type);
         navigation.navigate("Your Vehicles", {});
       }
     } catch (err) {
