@@ -67,7 +67,7 @@ export default function UpdateAction({ navigation }) {
         <View>
             <View style={styles.row}>
                 <TouchableOpacity
-                onPress={() => navigation.navigate("ViewIncident", {})}
+                onPress={() => navigation.navigate("viewIncident", {})}
                 >
                 <Icon name="chevron-left" color="black" iconStyle={styles.icon} />
                 </TouchableOpacity>
@@ -99,7 +99,7 @@ export default function UpdateAction({ navigation }) {
                 <View style={styles.row}>
                     <TouchableOpacity style={styles.resetBtn} 
                         onPress={() =>
-                        navigation.navigate("ViewIncident", { screen: "ViewIncident" })
+                        navigation.navigate("viewIncident", { screen: "ViewIncident" })
                     }>
                         <Text style={styles.resetText}>Back</Text>
                     </TouchableOpacity>
