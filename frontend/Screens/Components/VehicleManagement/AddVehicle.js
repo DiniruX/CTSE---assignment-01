@@ -34,7 +34,6 @@ const AddVehicle = ({ navigation }) => {
     //   if (response.didCancel) {
     //     return;
     //   }
-
     //   const img = {
     //     uri: response.uri,
     //     type: response.type,
@@ -61,7 +60,7 @@ const AddVehicle = ({ navigation }) => {
           registered,
         };
         const result = await axios.post(
-          "http://192.168.1.10:8000/vehicle/add",
+          "http://172.28.5.86:8000/vehicle/add",
           UserData
         );
 

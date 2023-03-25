@@ -33,14 +33,13 @@ export default function Register() {
       };
 
       const result = await axios.post(
-        "http://localhost:8000/user/register",
+        "http://172.28.5.86:8000/user/register",
         RegisterData
       );
 
       if (result) {
         alert(result.data.Message);
-      navigation.navigate("Login", {});
-
+        navigation.navigate("Login", {});
       }
     } catch (err) {
       setLoading(false);

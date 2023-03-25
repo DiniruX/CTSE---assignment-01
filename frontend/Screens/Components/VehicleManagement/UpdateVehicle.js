@@ -4,7 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { Card, Icon } from "@rneui/themed";
 import React from "react";
@@ -47,7 +47,10 @@ const UpdateVehicle = ({ navigation, route }) => {
           passengers,
           vehicleType,
         };
-        const result = await axios.put(`http://192.168.1.10:8000/vehicle/update/${route.params._id}`, vehicleData);
+        const result = await axios.put(
+          `http://172.28.5.86:8000/vehicle/update/${route.params._id}`,
+          vehicleData
+        );
 
         if (result?.status === 201) {
           // setSuccessShow(true);
@@ -199,8 +202,8 @@ const styles = StyleSheet.create({
     width: "40%",
     borderRadius: 25,
     marginLeft: 27,
-    marginTop:20,
-    marginBottom:130,
+    marginTop: 20,
+    marginBottom: 130,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
@@ -212,8 +215,8 @@ const styles = StyleSheet.create({
     width: "40%",
     borderRadius: 25,
     marginLeft: 20,
-    marginTop:20,
-    marginBottom:130,
+    marginTop: 20,
+    marginBottom: 130,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
