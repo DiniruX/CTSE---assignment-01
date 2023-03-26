@@ -13,7 +13,6 @@ function AuthContextProvider(props) {
   function logout() {
     setUserId(null);
     setUserType(null);
-    setUserName(null);
   }
 
   // ────────────────────────────────────────────────────────────────────────────────

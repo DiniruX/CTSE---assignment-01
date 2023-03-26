@@ -67,8 +67,6 @@ const Tabs = () => {
               ),
             }}
           />
-          /* Checking if the user is an admin or not. If the user is an admin,
-          it will show the admin tab. If not, it will not show the admin tab. */
           {authContext.userType == "Admin" ? (
             <Tab.Screen
               name="Admin"
