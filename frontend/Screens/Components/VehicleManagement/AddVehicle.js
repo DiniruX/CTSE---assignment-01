@@ -78,7 +78,7 @@ const AddVehicle = ({ navigation }) => {
           registered,
         };
         const result = await axios.post(
-          "http://192.168.238.253:8000/vehicle/add",
+          "http://172.28.2.183:8000/vehicle/add",
           UserData
         );
 

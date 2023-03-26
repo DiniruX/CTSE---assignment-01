@@ -6,8 +6,10 @@ function AuthContextProvider(props) {
   /* Setting the state of the component. */
   const [userType, setUserType] = useState(null);
   const [userId, setUserId] = useState(null);
-  const [userName, setUserName] = useState(null);
 
+/**
+ * It sets the userId, userType, and userName to null.
+ */
   function logout() {
     setUserId(null);
     setUserType(null);
@@ -22,10 +24,8 @@ function AuthContextProvider(props) {
       value={{
         userId,
         userType,
-        userName,
         setUserType,
         setUserId,
-        setUserName,
         logout,
       }}
     >

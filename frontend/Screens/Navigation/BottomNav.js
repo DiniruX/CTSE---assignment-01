@@ -10,7 +10,6 @@ import { TouchableOpacity } from "react-native";
 import UserListNavigationStack from "../Components/UserList";
 import RequestNavigationStack from "../Components/Incident";
 
-
 const Tabs = () => {
   const authContext = useContext(AuthContext);
 
@@ -49,12 +48,27 @@ const Tabs = () => {
               tabBarIcon: ({ focused }) => (
                 <Icon
                   name="directions-car"
-                  color={focused ? "black" : "red"}
+                  color={focused ? "red" : "black"}
                   iconStyle={{ marginRight: 10, fontSize: 30 }}
                 />
               ),
             }}
           />
+          <Tab.Screen
+            name="Incident"
+            component={RequestNavigationStack}
+            options={{
+              tabBarIcon: ({ focused }) => (
+                <Icon
+                  name="warning"
+                  color={focused ? "#000000" : "#585858"}
+                  iconStyle={{ marginRight: 10 }}
+                />
+              ),
+            }}
+          />
+          /* Checking if the user is an admin or not. If the user is an admin,
+          it will show the admin tab. If not, it will not show the admin tab. */
           {authContext.userType == "Admin" ? (
             <Tab.Screen
               name="Admin"
@@ -62,8 +76,8 @@ const Tabs = () => {
               options={{
                 tabBarIcon: ({ focused }) => (
                   <Icon
-                    name="people"
-                    color={focused ? "black" : "red"}
+                    name="contacts"
+                    color={focused ? "red" : "black"}
                     iconStyle={{ marginRight: 10, fontSize: 30 }}
                   />
                 ),
@@ -76,24 +90,11 @@ const Tabs = () => {
             options={{
               tabBarIcon: ({ focused }) => (
                 <Icon
-                  name="group-add"
-                  color={focused ? "black" : "red"}
+                  name="person"
+                  color={focused ? "red" : "black"}
                   iconStyle={{ marginRight: 10, fontSize: 30 }}
                 />
               ),
-            }}
-          />
-          <Tab.Screen
-            name="Incident"
-            component={RequestNavigationStack}
-            options={{
-            tabBarIcon: ({ focused }) => (
-              <Icon
-                name="warning"
-                color={focused ? "#000000" : "#585858"}
-                iconStyle={{ marginRight: 10 }}
-              />
-            ),
             }}
           />
           <Tab.Screen
@@ -103,7 +104,7 @@ const Tabs = () => {
               tabBarIcon: ({ focused }) => (
                 <Icon
                   name="directions-car"
-                  color={focused ? "black" : "red"}
+                  color={focused ? "red" : "black"}
                   iconStyle={{ marginRight: 10, fontSize: 30 }}
                 />
               ),
@@ -115,7 +116,7 @@ const Tabs = () => {
                   }}
                 >
                   <Icon
-                    name="code"
+                    name="logout"
                     color={onPress ? "black" : "red"}
                     iconStyle={{ margin: 20 }}
                   />
@@ -131,7 +132,7 @@ const Tabs = () => {
           options={{
             tabBarIcon: ({ focused }) => (
               <Icon
-                name="code"
+                name="login"
                 color={focused ? "black" : "red"}
                 iconStyle={{ marginRight: 10 }}
               />
@@ -140,7 +141,6 @@ const Tabs = () => {
         />
       )}
     </Tab.Navigator>
-
   );
 };
 
