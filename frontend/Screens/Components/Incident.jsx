@@ -2,7 +2,7 @@ import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AddIncident from "./IncidentManagement/AddIncident";
 import UpdateIncident from "./IncidentManagement/UpdateIncident";
-import ViewIncident from "./IncidentManagement/ViewIncident";
+import ViewIncident from "./IncidentManagement/viewIncident";
 import ViewAllIncidents from "./IncidentManagement/viewAllIncidents";
 import AddAction from "./IncidentManagement/addAction";
 import UpdateAction from "./IncidentManagement/updateAction";

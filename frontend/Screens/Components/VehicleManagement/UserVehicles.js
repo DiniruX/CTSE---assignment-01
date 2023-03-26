@@ -12,7 +12,7 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { Card, Icon } from "@rneui/themed";
 import { useIsFocused } from "@react-navigation/native";
 import axios from "axios";
-import AuthContext from "../../Context/UserDetailsContext";
+import AuthContext from "../../Context/UserContext";
 
 const UserVehicles = ({ navigation }) => {
   const [vehicles, setVehicles] = useState([]);

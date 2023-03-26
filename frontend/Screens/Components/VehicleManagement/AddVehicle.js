@@ -12,7 +12,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useContext } from "react";
 import CheckBox from "expo-checkbox";
-import AuthContext from "../../Context/UserDetailsContext";
+import AuthContext from "../../Context/UserContext";
 
 const AddVehicle = ({ navigation }) => {
   const [make, setMake] = useState("");
