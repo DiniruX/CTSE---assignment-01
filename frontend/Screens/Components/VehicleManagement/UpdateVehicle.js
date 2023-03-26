@@ -4,7 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  ScrollView,
+  ScrollView
 } from "react-native";
 import { Card, Icon } from "@rneui/themed";
 import React from "react";
@@ -28,7 +28,7 @@ const UpdateVehicle = ({ navigation, route }) => {
   };
 
   const backButton = (e) => {
-    navigation.navigate("UserVehicles", {});
+      navigation.navigate("UserVehicles", {});
   };
 
   const update = async (e) => {
@@ -47,7 +47,7 @@ const UpdateVehicle = ({ navigation, route }) => {
     } else if (!plateNo.trim()) {
       alert("Please enter the plate number (KB-1234, etc.)");
       return;
-    } else {
+    }  else {
       try {
         /* Creating an object with the same name as the variables. */
         const vehicleData = {
@@ -58,10 +58,7 @@ const UpdateVehicle = ({ navigation, route }) => {
           passengers,
           vehicleType,
         };
-        const result = await axios.put(
-          `http://192.168.238.253:8000/vehicle/update/${route.params._id}`,
-          vehicleData
-        );
+        const result = await axios.put(`http://192.168.238.253:8000/vehicle/update/${route.params._id}`, vehicleData);
 
         if (result?.status === 201) {
           // setSuccessShow(true);
@@ -211,8 +208,8 @@ const styles = StyleSheet.create({
     width: "40%",
     borderRadius: 25,
     marginLeft: 27,
-    marginTop: 20,
-    marginBottom: 130,
+    marginTop:20,
+    marginBottom:130,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
@@ -224,8 +221,8 @@ const styles = StyleSheet.create({
     width: "40%",
     borderRadius: 25,
     marginLeft: 20,
-    marginTop: 20,
-    marginBottom: 130,
+    marginTop:20,
+    marginBottom:130,
     height: 50,
     alignItems: "center",
     justifyContent: "center",

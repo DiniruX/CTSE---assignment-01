@@ -12,7 +12,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useContext } from "react";
 import CheckBox from "expo-checkbox";
-import AuthContext from "../../Context/UserContext";
+import AuthContext from "../../Context/UserDetailsContext";
 
 const AddVehicle = ({ navigation }) => {
   const [make, setMake] = useState("");
@@ -79,7 +79,6 @@ const AddVehicle = ({ navigation }) => {
         };
         const result = await axios.post(
           "http://192.168.238.253:8000/vehicle/add",
-
           UserData
         );
 

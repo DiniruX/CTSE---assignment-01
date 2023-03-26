@@ -45,7 +45,7 @@ export default function Register() {
       };
 
       const result = await axios.post(
-        "http://172.28.5.86:8000/user/register",
+        "http://localhost:8000/user/register",
         RegisterData
       );
 
