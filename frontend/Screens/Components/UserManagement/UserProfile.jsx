@@ -47,7 +47,11 @@ export default function UserProfile({ navigation, route }) {
   const getUserDetails = async (id) => {
     try {
       const result = await axios.get(
+<<<<<<< HEAD
+        `http://192.168.1.10:8000/user/get/${id}`
+=======
         `http://192.168.1.169:8000/user/get/${id}`
+>>>>>>> affef0f87e1433cf4e888a00f8b523523ace1d24
       );
       console.log(result.data);
       setUser(result?.data);
