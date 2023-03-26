@@ -26,11 +26,13 @@ export default function UserProfile({ navigation, route }) {
     setConfirm(true);
   };
 
-/**
- * If the route.params is undefined, then logout. Otherwise, navigate to the UserList screen.
- */
+  /**
+   * If the route.params is undefined, then logout. Otherwise, navigate to the UserList screen.
+   */
   const successAlert = (e) => {
     setSuccessShow(false);
+    setConfirm(false);
+    console.log(route.params);
     if (route.params === undefined) {
       logout();
     } else {
@@ -38,10 +40,10 @@ export default function UserProfile({ navigation, route }) {
     }
   };
 
-/**
- * It's an async function that uses the axios library to make a GET request to the backend server, and
- * then sets the state of the user object to the response data.
- */
+  /**
+   * It's an async function that uses the axios library to make a GET request to the backend server, and
+   * then sets the state of the user object to the response data.
+   */
   const getUserDetails = async (id) => {
     try {
       const result = await axios.get(
@@ -54,10 +56,10 @@ export default function UserProfile({ navigation, route }) {
     }
   };
 
-/**
- * If the user clicks the delete button, then try to delete the user from the database, if the user is
- * deleted, then show a success message.
- */
+  /**
+   * If the user clicks the delete button, then try to delete the user from the database, if the user is
+   * deleted, then show a success message.
+   */
   const deleteUser = async (e) => {
     if (e) {
       try {
@@ -75,7 +77,7 @@ export default function UserProfile({ navigation, route }) {
     }
   };
 
-/* It's an effect hook that runs when the component is mounted, and when the component is focused. */
+  /* It's an effect hook that runs when the component is mounted, and when the component is focused. */
   useEffect(() => {
     if (route.params === undefined) {
       getUserDetails(userId);
