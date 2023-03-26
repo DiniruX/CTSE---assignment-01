@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
-import AuthContext from "../../Context/UserDetailsContext";
+import AuthContext from "../../Context/UserContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import CustomAlert from "../customAlert/CustomAlert";

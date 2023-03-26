@@ -18,11 +18,11 @@ export default function RequestList({ navigation }) {
   const isFocused = useIsFocused();
   const [requestList, setRequestList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  // const { userName } = useContext(AuthContext);
+  const { userName } = useContext(AuthContext);
 
   async function getRequestData() {
     try {
-      await axios.get("http://172.28.5.86:8000/request/getAll").then((res) => {
+      await axios.get(BASE_URL + "/request/getAll").then((res) => {
         if (res.status === 200) {
           setRequestList(res.data);
           console.log(requestList);
@@ -42,7 +42,7 @@ export default function RequestList({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.TextTitle1}>Hi {userName},</Text> */}
+      <Text style={styles.TextTitle1}>Hi {userName},</Text>
       <View style={styles.row}>
         <Text style={styles.TextTitle2}>Ride Requests</Text>
         <TouchableOpacity onPress={() => navigation.navigate("AddRequest", {})}>
@@ -115,11 +115,6 @@ export default function RequestList({ navigation }) {
                     />
 
                     <View>
-                      {/* <Text style={styles.text1}>
-                        {element.passenger.firstName +
-                          " " +
-                          element.passenger.lastName}
-                      </Text> */}
                       <Text style={styles.text2}>
                         Location From {element.locationFrom}
                       </Text>

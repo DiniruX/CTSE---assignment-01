@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
 import VehicleNavigationStack from "../Components/Vehicle";
 import AuthNavigationStack from "../Components/Auth";
-import AuthContext from "../Context/UserDetailsContext";
+import AuthContext from "../Context/UserContext";
 import { useContext } from "react";
 import UserNavigationStack from "../Components/User";
 import { TouchableOpacity } from "react-native";
@@ -96,19 +96,7 @@ const Tabs = () => {
               ),
             }}
           />
-          {/* <Tab.Screen
-            name="View Requests"
-            component={ViewRequestNavigationStack}
-            options={{
-              tabBarIcon: ({ focused }) => (
-                <Icon
-                  name="collections-bookmark"
-                  color={focused ? "#000000" : "#585858"}
-                  iconStyle={{ marginRight: 10 }}
-                />
-              ),
-            }}
-          /> */}
+
           <Tab.Screen
             name="Logout"
             component={UserNavigationStack}

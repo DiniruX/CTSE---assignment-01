@@ -20,7 +20,7 @@ export default function ViewStatus({ navigation, route }) {
   const [successShow, setSuccessShow] = useState(false);
 
   async function getReqData() {
-    await axios.get(BASE_URL + `/request/ride/${id}`).then((res) => {   
+    await axios.get(BASE_URL + `/request/ride/${id}`).then((res) => {
       if (res.status === 200) {
         setReqData(res.data[0]);
         if (res.data[0].status === "Accepted") {
@@ -45,7 +45,6 @@ export default function ViewStatus({ navigation, route }) {
       .put(BASE_URL + `/request/status/${id}`, dataObject)
       .then((res) => {
         if (res.status === 200) {
-          //setVehicleOwnerBlock(true);
           setSuccessShow(true);
         }
       });

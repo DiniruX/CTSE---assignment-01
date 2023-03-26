@@ -29,7 +29,6 @@ export default function RideSummary({ navigation, route }) {
       .put(BASE_URL + `/request/status/${id}`, dataObject)
       .then((res) => {
         if (res.status === 200) {
-          //setVehicleOwnerBlock(true);
           setConfirm(true);
         }
       });

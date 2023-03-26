@@ -3,8 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import axios from "axios";
 import { BASE_URL } from "../constants/Url.json";
-// import AuthContext from "../../Context/UserContext";
-import AuthContext from "../../Context/UserDetailsContext";
+import AuthContext from "../../Context/UserContext";
 import CustomAlert from "../customAlert/CustomAlert";
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -107,10 +106,6 @@ export default function ViewRequestInfo({ navigation, route }) {
               marginTop: 30,
             }}
           />
-          {/* <Text style={styles.text1}>
-            {route.params.request.passenger.firstName}{" "}
-            {route.params.request.passenger.lastName}
-          </Text> */}
         </View>
 
         <View style={styles.container2}>
