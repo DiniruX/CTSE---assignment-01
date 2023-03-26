@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import axios from "axios";
-import AuthContext from "../../../Context/UserContext";
+import AuthContext from "../../../Context/UserDetailsContext";
 import { useContext } from "react";
 
 const Login = ({ navigation }) => {

@@ -12,7 +12,7 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { Card, Icon } from "@rneui/themed";
 import { useIsFocused } from "@react-navigation/native";
 import axios from "axios";
-import AuthContext from "../../Context/UserContext";
+import AuthContext from "../../Context/UserDetailsContext";
 
 const UserVehicles = ({ navigation }) => {
   const [vehicles, setVehicles] = useState([]);
@@ -39,7 +39,7 @@ const UserVehicles = ({ navigation }) => {
     console.log(userId);
     try {
       const result = await axios.get(
-        `http://192.168.238.253:8000/vehicle/getByUser/${userId}`
+        `http://192.168.238.253:8000/vehicle/getByUser/${userId}` 
       );
       /* Setting the state of the notes and totalPage variables. */
       setVehicles(result?.data);

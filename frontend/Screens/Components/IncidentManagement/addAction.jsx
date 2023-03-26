@@ -1,128 +1,126 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Card, Icon } from "@rneui/themed";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  TextInput,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
 import axios from "axios";
 
 export default function AddAction({ navigation }) {
-  const [incident, setIncident] = useState("");
-  const [id, setId] = useState("");
-  const [action, setAction] = useState("");
+    const [incident, setIncident] = useState("");
+    const [id, setId] = useState("");
+    const [action, setAction] = useState("");
 
-  useEffect(() => {
-    getdata();
-  }, []);
+    useEffect(() => {
+    getdata()
+}, [])
 
-  const handleEdit = (item) => {
+const handleEdit = (item) => {
     var data = {
-      incident: incident,
-      id: id,
-      action: action,
-    };
+        "incident" : incident,
+        "id": id,
+        "action" : action
+    }
     axios({
-      url: `http://172.28.6.79:8000/incident/update/${id}`,
-      method: "PUT",
-      data: data,
-      headers: {
-        "Content-Type": "application/json",
-      },
+        url:`http://172.28.6.79:8000/incident/update/${id}`,
+        method:"PUT",
+        data : data,
+        headers : {
+            "Content-Type" : "application/json"
+        }
     }).then((res) => {
-      console.log(data);
-      getdata();
+        console.log(data);
+        getdata();
+        
+        setIncident(item.incident)
+        setId(item.id)
+        setAction(item.action)
+        
+        console.log(data);
+    })
+}
 
-      setIncident(item.incident);
-      setId(item.id);
-      setAction(item.action);
-
-      console.log(data);
-    });
-  };
-
-  const getdata = async () => {
+const getdata = async () => {
     const res = await fetch(`http://172.28.6.79:8000/incident/view/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
     });
 
     const data = await res.json();
 
     if (res.status === 422 || !data) {
-      console.log("Please take the action");
-      return 0;
+        console.log("Please take the action");
+        return 0;
     } else {
-      setIncident(data.incident);
-      setId(data.id);
-      setAction(data.action);
-      console.log("get data");
-      console.log(data);
+        setIncident(data.incident);
+        setId(data.id);
+        setAction(data.action);
+        console.log("get data");
+        console.log(data);
     }
-  };
+};
 
-  const onChangeActionName = (value) => {
-    setAction(value);
-  };
+const onChangeActionName = (value) => {
+    setAction(value)
+        }
 
-  return (
-    <View>
-      <View style={styles.row}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("ViewAllIncidents", {})}
-        >
-          <Icon name="chevron-left" color="black" iconStyle={styles.icon} />
-        </TouchableOpacity>
-        <Text style={styles.TextTitle1}>Take Action</Text>
-      </View>
+    return (
 
-      <Card.Divider color="black" style={{ height: 4 }} />
 
-      <View style={styles.container1}>
-        <Text style={styles.text1}>Referrence No : {id}</Text>
+        <View>
+            <View style={styles.row}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("ViewAllIncidents", {})}
+                >
+                    <Icon name="chevron-left" color="black" iconStyle={styles.icon} />
+                </TouchableOpacity>
+            <Text style={styles.TextTitle1}>Take Action</Text>
+        </View>
+
+        <Card.Divider color="black" style={{ height: 4 }} />
+
+        <View style={styles.container1}>
+            <Text style={styles.text1}>Referrence No : {id}</Text>
+       
 
         <Text style={styles.text1}>Vehicle No</Text>
+                
 
         <Text style={styles.text1}>Owner Name</Text>
+                
 
         <Text style={styles.text1}>Passenger Name</Text>
 
         <Text style={styles.text1}>Incident</Text>
-
+        
         <View style={styles.inputView}>
-          <TextInput
+            <TextInput
             style={styles.TextInput}
+            
             placeholderTextColor="#003f5c"
-            value={action}
-            name="action"
+                value={action}
+            name='action'
             onChangeText={onChangeActionName}
-          />
+            />
         </View>
+        
+        
 
         <Card.Divider color="black" style={{ height: 4, marginTop: 10 }} />
 
-        <View style={styles.row}>
-          <TouchableOpacity
-            style={styles.resetBtn}
-            onPress={() =>
-              navigation.navigate("ViewAllIncidents", {
-                screen: "ViewAllIncidents",
-              })
-            }
-          >
-            <Text style={styles.resetText}>Back</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.addBtn} onPress={AddAction}>
-            <Text style={styles.addText}>Add</Text>
-          </TouchableOpacity>
+            <View style={styles.row}>
+            <TouchableOpacity style={styles.resetBtn} 
+                onPress={() =>
+                navigation.navigate("ViewAllIncidents", { screen: "ViewAllIncidents" })
+            }>
+                <Text style={styles.resetText}>Back</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.addBtn} onPress={AddAction}>
+                <Text style={styles.addText}>Add</Text>
+            </TouchableOpacity>
+            </View>
         </View>
-      </View>
-    </View>
-  );
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -151,7 +149,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 15,
     marginBottom: 30,
-    marginRight: 15,
+    marginRight: 15
   },
   resetBtn: {
     width: "40%",

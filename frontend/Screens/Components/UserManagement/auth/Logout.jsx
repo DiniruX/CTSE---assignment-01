@@ -27,7 +27,7 @@ const Login = ({ navigation }) => {
       };
 
       const result = await axios.post(
-        "http://172.28.5.86:8000/user/login",
+        "http://localhost:8000/user/login",
         loginData
       );
 

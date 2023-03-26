@@ -3,12 +3,13 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
 import VehicleNavigationStack from "../Components/Vehicle";
 import AuthNavigationStack from "../Components/Auth";
-import AuthContext from "../Context/UserContext";
+import AuthContext from "../Context/UserDetailsContext";
 import { useContext } from "react";
 import UserNavigationStack from "../Components/User";
 import { TouchableOpacity } from "react-native";
 import UserListNavigationStack from "../Components/UserList";
 import RequestNavigationStack from "../Components/Incident";
+
 
 const Tabs = () => {
   const authContext = useContext(AuthContext);
@@ -83,30 +84,16 @@ const Tabs = () => {
             }}
           />
           <Tab.Screen
-            name="Request"
-            component={RequestNavigationStack}
-            options={{
-              tabBarIcon: ({ focused }) => (
-                <Icon
-                  name="collections-bookmark"
-                  color={focused ? "#000000" : "#585858"}
-                  iconStyle={{ marginRight: 10 }}
-                />
-              ),
-            }}
-          />
-
-          <Tab.Screen
             name="Incident"
             component={RequestNavigationStack}
             options={{
-              tabBarIcon: ({ focused }) => (
-                <Icon
-                  name="warning"
-                  color={focused ? "#000000" : "#585858"}
-                  iconStyle={{ marginRight: 10 }}
-                />
-              ),
+            tabBarIcon: ({ focused }) => (
+              <Icon
+                name="warning"
+                color={focused ? "#000000" : "#585858"}
+                iconStyle={{ marginRight: 10 }}
+              />
+            ),
             }}
           />
           <Tab.Screen
@@ -153,6 +140,7 @@ const Tabs = () => {
         />
       )}
     </Tab.Navigator>
+
   );
 };
 
