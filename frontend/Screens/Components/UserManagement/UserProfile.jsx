@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
-import AuthContext from "../../Context/UserDetailsContext";
+import AuthContext from "../../Context/UserContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import CustomAlert from "../customAlert/CustomAlert";
@@ -33,9 +33,7 @@ export default function UserProfile({ navigation, route }) {
 
   const getUserDetails = async (id) => {
     try {
-      const result = await axios.get(
-        `http://localhost:8000/user/get/${id}`
-      );
+      const result = await axios.get(`http://172.28.5.86:8000/user/get/${id}`);
       console.log(result.data);
       setUser(result?.data);
     } catch (error) {
@@ -47,7 +45,7 @@ export default function UserProfile({ navigation, route }) {
     if (e) {
       try {
         const result = await axios.delete(
-          `http://localhost:8000/user/delete/${user._id}`
+          `http://172.28.5.86:8000/user/delete/${user._id}`
         );
         if (result?.status === 201) {
           setSuccessShow(true);
@@ -69,7 +67,7 @@ export default function UserProfile({ navigation, route }) {
   }, [isFocused]);
 
   return (
-    <ScrollView >
+    <ScrollView>
       <View style={styles.row}>
         {route.params !== undefined ? (
           <TouchableOpacity onPress={() => navigation.navigate("UserList")}>
