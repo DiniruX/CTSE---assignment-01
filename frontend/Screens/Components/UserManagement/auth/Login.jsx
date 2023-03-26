@@ -6,6 +6,7 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import axios from "axios";
 import AuthContext from "../../../Context/UserContext";
@@ -16,7 +17,6 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState("");
 
   const authContext = useContext(AuthContext);
-  const { setUserId, setUser } = authContext;
 
   const login = async (e) => {
     e.preventDefault();
@@ -27,15 +27,15 @@ const Login = ({ navigation }) => {
       };
 
       const result = await axios.post(
-        "http://172.28.5.86:8000/user/login",
+        "http://172.28.6.79:8000/user/login",
         loginData
       );
 
       console.log(result.data);
       console.log(result.data.type);
       if (result) {
-        setUserId(result.data.userId);
-        setUserType(result.data.type);
+        authContext.setUserId(result.data.userId);
+        authContext.setUserType(result.data.type);
         navigation.navigate("Your Vehicles", {});
       }
     } catch (err) {
@@ -45,50 +45,52 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Travel Buddy</Text>
-      <Text style={styles.header2}>Login</Text>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <View style={styles.bar} />
-      </View>
-      <StatusBar style="auto" />
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Email"
-          placeholderTextColor="#003f5c"
-          onChangeText={(email) => setEmail(email)}
-        />
-      </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.header}>Travel Buddy</Text>
+        <Text style={styles.header2}>Login</Text>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={styles.bar} />
+        </View>
+        <StatusBar style="auto" />
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Email"
+            placeholderTextColor="#003f5c"
+            onChangeText={(email) => setEmail(email)}
+          />
+        </View>
 
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Password"
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
-        />
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Password"
+            placeholderTextColor="#003f5c"
+            secureTextEntry={true}
+            onChangeText={(password) => setPassword(password)}
+          />
+        </View>
+
+        <TouchableOpacity style={styles.loginBtn} onPress={login}>
+          <Text style={styles.loginText}>Login</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 16,
+              fontWeight: "bold",
+              marginBottom: 20,
+            }}
+            onPress={() => navigation.navigate("Register", {})}
+          >
+            Need an Account ? Click to Register now
+          </Text>
+        </TouchableOpacity>
       </View>
-
-      <TouchableOpacity style={styles.loginBtn} onPress={login}>
-        <Text style={styles.loginText}>Login</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity>
-        <Text
-          style={{
-            textAlign: "center",
-            fontSize: 16,
-            fontWeight: "bold",
-            marginBottom: 20,
-          }}
-          onPress={() => navigation.navigate("Register", {})}
-        >
-          Need an Account ? Click to Register now
-        </Text>
-      </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -96,7 +98,7 @@ export default Login;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 200,
+    marginTop: 100,
     marginHorizontal: 20,
     elevation: 20,
     borderRadius: 10,

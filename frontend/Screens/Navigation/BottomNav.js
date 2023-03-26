@@ -8,8 +8,7 @@ import { useContext } from "react";
 import UserNavigationStack from "../Components/User";
 import { TouchableOpacity } from "react-native";
 import UserListNavigationStack from "../Components/UserList";
-import RequestNavigationStack from "../Components/Request";
-// import ViewRequestNavigationStack from "./../Components/RequestManagement/ViewRequest";
+import RequestNavigationStack from "../Components/Incident";
 
 const Tabs = () => {
   const authContext = useContext(AuthContext);
@@ -55,15 +54,15 @@ const Tabs = () => {
               ),
             }}
           />
-          {authContext.userType == null ? (
+          {authContext.userType == "Admin" ? (
             <Tab.Screen
               name="Admin"
               component={UserListNavigationStack}
               options={{
                 tabBarIcon: ({ focused }) => (
                   <Icon
-                    name="directions-car"
-                    color={focused ? "white" : "red"}
+                    name="people"
+                    color={focused ? "black" : "red"}
                     iconStyle={{ marginRight: 10, fontSize: 30 }}
                   />
                 ),
@@ -76,7 +75,7 @@ const Tabs = () => {
             options={{
               tabBarIcon: ({ focused }) => (
                 <Icon
-                  name="person"
+                  name="group-add"
                   color={focused ? "black" : "red"}
                   iconStyle={{ marginRight: 10, fontSize: 30 }}
                 />
@@ -98,13 +97,26 @@ const Tabs = () => {
           />
 
           <Tab.Screen
+            name="Incident"
+            component={RequestNavigationStack}
+            options={{
+              tabBarIcon: ({ focused }) => (
+                <Icon
+                  name="warning"
+                  color={focused ? "#000000" : "#585858"}
+                  iconStyle={{ marginRight: 10 }}
+                />
+              ),
+            }}
+          />
+          <Tab.Screen
             name="Logout"
             component={UserNavigationStack}
             options={{
               tabBarIcon: ({ focused }) => (
                 <Icon
                   name="directions-car"
-                  color={focused ? "white" : "red"}
+                  color={focused ? "black" : "red"}
                   iconStyle={{ marginRight: 10, fontSize: 30 }}
                 />
               ),
@@ -117,7 +129,7 @@ const Tabs = () => {
                 >
                   <Icon
                     name="code"
-                    color={"#000000"}
+                    color={onPress ? "black" : "red"}
                     iconStyle={{ margin: 20 }}
                   />
                 </TouchableOpacity>
@@ -133,7 +145,7 @@ const Tabs = () => {
             tabBarIcon: ({ focused }) => (
               <Icon
                 name="code"
-                color={focused ? "#000000" : "#585858"}
+                color={focused ? "black" : "red"}
                 iconStyle={{ marginRight: 10 }}
               />
             ),

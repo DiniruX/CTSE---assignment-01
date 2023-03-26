@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card, Icon } from "@rneui/themed";
 import {
+    ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -59,6 +60,18 @@ export default function UpdateUser({ navigation, route }) {
 
   const update = async (e) => {
     if (e) {
+      if (
+        firstName == null ||
+        lastName == null ||
+        email == null ||
+        mobile == null ||
+        address == null ||
+        password == null ||
+        passwordVerify == null
+      ) {
+        alert("Please fill all fields");
+        return;
+      }
       try {
         /* Creating an object with the same name as the variables. */
         const UserData = {
@@ -88,7 +101,7 @@ export default function UpdateUser({ navigation, route }) {
   };
 
   return (
-    <View>
+    <ScrollView>
       <View style={styles.row}>
         <TouchableOpacity onPress={() => backButton()}>
           <Icon name="chevron-left" color="black" iconStyle={styles.icon} />
@@ -189,7 +202,7 @@ export default function UpdateUser({ navigation, route }) {
         visibility={successShow}
         dismissAlert={successAlert}
       />
-    </View>
+    </ScrollView>
   );
 }
 

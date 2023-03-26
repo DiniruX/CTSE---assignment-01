@@ -28,15 +28,26 @@ const UpdateVehicle = ({ navigation, route }) => {
   };
 
   const backButton = (e) => {
-    if (make !== "" || model !== "" || vehicleType !== "") {
-      setBackShow(true);
-    } else {
-      navigation.navigate("UserVehicles", {});
-    }
+    navigation.navigate("UserVehicles", {});
   };
 
   const update = async (e) => {
-    if (e) {
+    if (!make.trim()) {
+      alert("Please Enter Make of the Vehicle (Toyota, Nissan, etc.)");
+      return;
+    } else if (!model.trim()) {
+      alert("Please Enter Model of the Vehicle (Corolla, Tiida, etc.)");
+      return;
+    } else if (!vehicleType.trim()) {
+      alert("Please Enter Vehicle Type (Car, Van, etc.)");
+      return;
+    } else if (!passengers.trim()) {
+      alert("Please enter number of passengers (1, 2, 3, etc.)");
+      return;
+    } else if (!plateNo.trim()) {
+      alert("Please enter the plate number (KB-1234, etc.)");
+      return;
+    } else {
       try {
         /* Creating an object with the same name as the variables. */
         const vehicleData = {
@@ -48,21 +59,19 @@ const UpdateVehicle = ({ navigation, route }) => {
           vehicleType,
         };
         const result = await axios.put(
-          `http://172.28.5.86:8000/vehicle/update/${route.params._id}`,
+          `http://192.168.238.253:8000/vehicle/update/${route.params._id}`,
           vehicleData
         );
 
         if (result?.status === 201) {
           // setSuccessShow(true);
-          alert("Vehicle added successfully!");
+          alert("Vehicle updated successfully!");
           navigation.navigate("UserVehicles", {});
         }
       } catch (err) {
         console.error(err);
         alert(err?.response?.data?.errorMessage);
       }
-    } else {
-      setConfirm(false);
     }
   };
 
@@ -160,7 +169,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   container: {
-    backgroundColor: "grey",
+    backgroundColor: "#bb8de0",
     marginLeft: 10,
     marginRight: 10,
     borderWidth: 1,
@@ -184,7 +193,7 @@ const styles = StyleSheet.create({
   TextInput: {
     height: 50,
     padding: 10,
-    borderWidth: 3,
+    borderWidth: 1,
     fontSize: 18,
     marginLeft: 10,
     marginRight: 10,

@@ -10,8 +10,9 @@ import {
 import { Card, Icon } from "@rneui/themed";
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import CheckBox from "expo-checkbox";
+import AuthContext from "../../Context/UserDetailsContext";
 
 const AddVehicle = ({ navigation }) => {
   const [make, setMake] = useState("");
@@ -20,6 +21,8 @@ const AddVehicle = ({ navigation }) => {
   const [passengers, setPassengers] = useState("");
   const [vehicleType, setVehicleType] = useState("");
   const [registered, setRegistered] = useState(false);
+
+  const { userId, userName } = useContext(AuthContext);
 
   const resetForm = () => {
     setMake("");
@@ -46,12 +49,27 @@ const AddVehicle = ({ navigation }) => {
     navigation.navigate("UserVehicles", {});
   };
 
-  const register = async (e) => {
-    if (e) {
+  const register = async () => {
+    if (!make.trim()) {
+      alert("Please Enter Make of the Vehicle (Toyota, Nissan, etc.)");
+      return;
+    } else if (!model.trim()) {
+      alert("Please Enter Model of the Vehicle (Corolla, Tiida, etc.)");
+      return;
+    } else if (!vehicleType.trim()) {
+      alert("Please Enter Vehicle Type (Car, Van, etc.)");
+      return;
+    } else if (!passengers.trim()) {
+      alert("Please enter number of passengers (1, 2, 3, etc.)");
+      return;
+    } else if (!plateNo.trim()) {
+      alert("Please enter the plate number (KB-1234, etc.)");
+      return;
+    } else {
       try {
         /* Creating an object with the same name as the variables. */
         const UserData = {
-          // user: userId,
+          userId: userId,
           make,
           model,
           plateNo,
@@ -60,7 +78,8 @@ const AddVehicle = ({ navigation }) => {
           registered,
         };
         const result = await axios.post(
-          "http://172.28.5.86:8000/vehicle/add",
+          "http://192.168.238.253:8000/vehicle/add",
+
           UserData
         );
 
@@ -73,8 +92,6 @@ const AddVehicle = ({ navigation }) => {
         console.error(err);
         alert(err?.response?.data?.errorMessage);
       }
-    } else {
-      setConfirm(false);
     }
   };
 
@@ -90,7 +107,7 @@ const AddVehicle = ({ navigation }) => {
       <Card.Divider color="black" style={{ height: 4 }} />
 
       <View style={styles.container}>
-        <View style={styles.row}>
+        {/* <View style={styles.row}>
           <Text style={styles.label}>Photo of the car</Text>
           <Text style={styles.required}>*</Text>
         </View>
@@ -99,7 +116,7 @@ const AddVehicle = ({ navigation }) => {
           <TouchableOpacity onPress={handleImgUpload}>
             <Icon name="add" color="black" iconStyle={styles.addIcon} />
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         <View style={styles.row}>
           <Text style={styles.label}>Make</Text>
@@ -124,7 +141,10 @@ const AddVehicle = ({ navigation }) => {
           onChangeText={(e) => setModel(e)}
         />
 
-        <Text style={styles.label}>Plate Number</Text>
+        <View style={styles.row}>
+          <Text style={styles.label}>Plate Number</Text>
+          <Text style={styles.required}>*</Text>
+        </View>
         <TextInput
           value={plateNo}
           style={styles.TextInput}
@@ -133,7 +153,10 @@ const AddVehicle = ({ navigation }) => {
           onChangeText={(e) => setPlateNo(e)}
         />
 
-        <Text style={styles.label}>No of Passengers</Text>
+        <View style={styles.row}>
+          <Text style={styles.label}>No of Passengers</Text>
+          <Text style={styles.required}>*</Text>
+        </View>
         <TextInput
           value={passengers}
           style={styles.TextInput}
@@ -168,7 +191,7 @@ const AddVehicle = ({ navigation }) => {
           <TouchableOpacity style={styles.resetBtn} onPress={resetForm}>
             <Text style={styles.resetText}>Reset</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.addBtn} onPress={register}>
+          <TouchableOpacity style={styles.addBtn} onPress={() => register()}>
             <Text style={styles.addText}>Add</Text>
           </TouchableOpacity>
         </View>
@@ -193,7 +216,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   container: {
-    backgroundColor: "grey",
+    backgroundColor: "#bb8de0",
     marginLeft: 10,
     marginRight: 10,
     borderWidth: 1,
@@ -217,7 +240,7 @@ const styles = StyleSheet.create({
   TextInput: {
     height: 50,
     padding: 10,
-    borderWidth: 3,
+    borderWidth: 1,
     fontSize: 18,
     marginLeft: 10,
     marginRight: 10,
