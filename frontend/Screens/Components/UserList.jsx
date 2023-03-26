@@ -5,7 +5,7 @@ import UpdateUser from "./UserManagement/UpdateUser";
 import ViewAllUser from "./UserManagement/ViewAllUser";
 import AddAdmin from "./UserManagement/AddAdmin";
 
-const UserListNavigationStack = () => {
+const AdminNavigationStack = () => {
   const Stack = createNativeStackNavigator();
 
   return (
@@ -22,4 +22,4 @@ const UserListNavigationStack = () => {
   );
 };
 
-export default UserListNavigationStack;
+export default AdminNavigationStack;
