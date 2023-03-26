@@ -57,3 +57,4 @@ app.use("/incident", require("./routes/incident.route"));
 app.use("/user", require("./routes/user.route"));
 app.use("/vehicle", require("./routes/vehicle.route"));
 app.use("/user", require("./routes/user.route"));
+app.use("/request", require("./routes/request.route"));
