@@ -34,7 +34,7 @@ export default function UserProfile({ navigation, route }) {
   const getUserDetails = async (id) => {
     try {
       const result = await axios.get(
-        `http://localhost:8000/user/get/${id}`
+        `http://192.168.1.10:8000/user/get/${id}`
       );
       console.log(result.data);
       setUser(result?.data);
@@ -47,7 +47,7 @@ export default function UserProfile({ navigation, route }) {
     if (e) {
       try {
         const result = await axios.delete(
-          `http://localhost:8000/user/delete/${user._id}`
+          `http://192.168.1.10:8000/user/delete/${user._id}`
         );
         if (result?.status === 201) {
           setSuccessShow(true);

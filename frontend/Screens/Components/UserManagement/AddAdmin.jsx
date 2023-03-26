@@ -44,7 +44,7 @@ export default function AddAdmin({ navigation }) {
       };
 
       const result = await axios.post(
-        "http://localhost:8000/user/add",
+        "http://192.168.1.10:8000/user/add",
         RegisterData
       );
       console.log(result);

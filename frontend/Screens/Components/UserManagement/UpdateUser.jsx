@@ -83,7 +83,7 @@ export default function UpdateUser({ navigation, route }) {
         };
 
         const result = await axios.put(
-          `http://localhost:8000/user/update/${route.params._id}`,
+          `http://192.168.1.10:8000/user/update/${route.params._id}`,
           UserData
         );
 

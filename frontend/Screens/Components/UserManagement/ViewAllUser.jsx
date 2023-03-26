@@ -18,7 +18,7 @@ export default function ViewAllUser({ navigation }) {
 
   async function getUserData() {
     try {
-      await axios.get("http://localhost:8000/user/getAll").then((res) => {
+      await axios.get("http://192.168.1.10:8000/user/getAll").then((res) => {
         console.log(res.data);
         if (res.status === 200) {
           setUsers(res.data);
