@@ -145,7 +145,6 @@ export default function UpdateUser({ navigation, route }) {
           placeholder="First Name"
           onChangeText={(e) => setFirstName(e)}
         />
-
         <View style={styles.row}>
           <Text style={styles.label}>Last Name</Text>
           <Text style={styles.required}>*</Text>
@@ -157,31 +156,18 @@ export default function UpdateUser({ navigation, route }) {
           placeholder="Last Name"
           onChangeText={(e) => setLastName(e)}
         />
-
         <View style={styles.row}>
           <Text style={styles.label}>E-mail</Text>
           <Text style={styles.required}>*</Text>
         </View>
-        {firstName === "Sachin" && (
-          <TextInput
-            value={email}
-            required
-            style={styles.TextInput}
-            placeholder="E-mail"
-            editable={false}
-            onChangeText={(e) => setEmail(e)}
-          />
-        )}
-        {firstName !== "Sachin" && (
-          <TextInput
-            value={email}
-            required
-            style={styles.TextInput}
-            placeholder="E-mail"
-            onChangeText={(e) => setEmail(e)}
-          />
-        )}
-
+        <TextInput
+          value={email}
+          required
+          style={styles.TextInput}
+          placeholder="E-mail"
+          editable={false}
+          onChangeText={(e) => setEmail(e)}
+        />
         <View style={styles.row}>
           <Text style={styles.label}>Mobile</Text>
           <Text style={styles.required}>*</Text>
@@ -195,7 +181,6 @@ export default function UpdateUser({ navigation, route }) {
           placeholder="Mobile Number"
           onChangeText={(mobile) => setMobile(mobile.replace(/[^0-9]/g, ""))}
         />
-
         <View style={styles.row}>
           <Text style={styles.label}>Address</Text>
           <Text style={styles.required}>*</Text>
@@ -207,9 +192,7 @@ export default function UpdateUser({ navigation, route }) {
           placeholder="Address"
           onChangeText={(address) => setAddress(address)}
         />
-
         <Card.Divider color="black" style={{ height: 4, marginTop: 10 }} />
-
         <View style={styles.row}>
           <TouchableOpacity style={styles.resetBtn} onPress={resetForm}>
             <Text style={styles.resetText}>Reset</Text>
