@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, Icon } from "@rneui/themed";
 import {
-    ScrollView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -21,6 +21,9 @@ export default function UpdateUser({ navigation, route }) {
   const [confirm, setConfirm] = useState(false);
   const [successShow, setSuccessShow] = useState(false);
 
+  /**
+   * ResetForm() is a function that sets the state of the form to the values of the route parameters.
+   */
   const resetForm = () => {
     setFirstName(route.params.firstName);
     setLastName(route.params.lastName);
@@ -28,7 +31,11 @@ export default function UpdateUser({ navigation, route }) {
     setMobile(route.params.mobile);
   };
 
-  const backButton = (e) => {
+  /**
+   * If the user has changed any of the fields, then show the back button. Otherwise, navigate to the
+   * UserProfile screen.
+   */
+  const backButton = () => {
     if (
       firstName !== route.params.firstName ||
       lastName !== route.params.lastName ||
@@ -41,23 +48,40 @@ export default function UpdateUser({ navigation, route }) {
     }
   };
 
-  const confirmAlert = (e) => {
+  /**
+   * If the user presses the back button, the app will navigate to the UserProfile screen.
+   */
+  const confirmAlert = () => {
     setBackShow(false);
     if (e) {
       navigation.navigate("UserProfile", route.params);
     }
   };
 
+  /**
+   * When the user clicks the button, the success alert will disappear, the back alert will disappear,
+   * and the user will be navigated to the UserProfile page.
+   */
   const successAlert = (e) => {
     setSuccessShow(false);
     setBackShow(false);
     navigation.navigate("UserProfile", route.params);
   };
 
+  /**
+   * When the user clicks the button, set the state of the confirm variable to true.
+   */
   const updateHandler = (e) => {
     setConfirm(true);
   };
 
+  /**
+   * If the user clicks the update button, then check if all the fields are filled, if not, then alert
+   * the user to fill all the fields, if yes, then create an object with the same name as the variables,
+   * then send a put request to the server with the object and the id of the user, if the status is 201,
+   * then show the success message, if not, then show the error message.
+   * @returns The result is returning the updated data.
+   */
   const update = async (e) => {
     if (e) {
       if (
@@ -65,9 +89,7 @@ export default function UpdateUser({ navigation, route }) {
         lastName == null ||
         email == null ||
         mobile == null ||
-        address == null ||
-        password == null ||
-        passwordVerify == null
+        address == null
       ) {
         alert("Please fill all fields");
         return;
@@ -83,7 +105,7 @@ export default function UpdateUser({ navigation, route }) {
         };
 
         const result = await axios.put(
-          `http://192.168.1.10:8000/user/update/${route.params._id}`,
+          `http://192.168.1.169:8000/user/update/${route.params._id}`,
           UserData
         );
 
@@ -101,7 +123,7 @@ export default function UpdateUser({ navigation, route }) {
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={{ marginBottom: 70 }}>
       <View style={styles.row}>
         <TouchableOpacity onPress={() => backButton()}>
           <Icon name="chevron-left" color="black" iconStyle={styles.icon} />
@@ -123,42 +145,42 @@ export default function UpdateUser({ navigation, route }) {
           placeholder="First Name"
           onChangeText={(e) => setFirstName(e)}
         />
-
         <View style={styles.row}>
           <Text style={styles.label}>Last Name</Text>
           <Text style={styles.required}>*</Text>
         </View>
         <TextInput
           value={lastName}
+          required
           style={styles.TextInput}
           placeholder="Last Name"
           onChangeText={(e) => setLastName(e)}
         />
-
         <View style={styles.row}>
           <Text style={styles.label}>E-mail</Text>
           <Text style={styles.required}>*</Text>
         </View>
         <TextInput
           value={email}
+          required
           style={styles.TextInput}
-          maxLength={8}
           placeholder="E-mail"
+          editable={false}
           onChangeText={(e) => setEmail(e)}
         />
-
         <View style={styles.row}>
           <Text style={styles.label}>Mobile</Text>
           <Text style={styles.required}>*</Text>
         </View>
         <TextInput
-          value={mobile}
+          value={mobile.toString()}
           style={styles.TextInput}
-          maxLength={10}
-          placeholder="Mobile"
-          onChangeText={(e) => setMobile(e.replace(/[^0-9]/g, ""))}
+          required
+          keyboardType="numeric"
+          maxLength={9}
+          placeholder="Mobile Number"
+          onChangeText={(mobile) => setMobile(mobile.replace(/[^0-9]/g, ""))}
         />
-
         <View style={styles.row}>
           <Text style={styles.label}>Address</Text>
           <Text style={styles.required}>*</Text>
@@ -170,9 +192,7 @@ export default function UpdateUser({ navigation, route }) {
           placeholder="Address"
           onChangeText={(address) => setAddress(address)}
         />
-
         <Card.Divider color="black" style={{ height: 4, marginTop: 10 }} />
-
         <View style={styles.row}>
           <TouchableOpacity style={styles.resetBtn} onPress={resetForm}>
             <Text style={styles.resetText}>Reset</Text>
@@ -219,7 +239,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: "bold",
     alignItems: "center",
-    marginLeft: 40,
+    marginLeft: 30,
   },
   container: {
     backgroundColor: "#D5BEFF",

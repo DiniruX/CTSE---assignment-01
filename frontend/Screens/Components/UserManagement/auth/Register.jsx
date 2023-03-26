@@ -11,7 +11,7 @@ import {
 import axios from "axios";
 import { Card } from "@rneui/themed";
 
-export default function Register() {
+export default function Register({ navigation }) {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState(null);
@@ -20,8 +20,14 @@ export default function Register() {
   const [password, setPassword] = useState(null);
   const [passwordVerify, setPasswordVerify] = useState(null);
 
+/**
+ * It's a function that sends a post request to the server with the user's data.
+ * @returns The result is being returned as an object.
+ */
   const register = async (e) => {
     e.preventDefault();
+   /* This is checking if any of the fields are empty. If they are, it will alert the user to fill all
+   fields. */
     if (
       firstName == null ||
       lastName == null ||
@@ -45,7 +51,7 @@ export default function Register() {
       };
 
       const result = await axios.post(
-        "http://192.168.1.10:8000/user/register",
+        "http://192.168.1.169:8000/user/register",
         RegisterData
       );
 
@@ -59,6 +65,9 @@ export default function Register() {
     }
   };
 
+/**
+ * "resetForm" is a function that sets the state of all the form fields to an empty string.
+ */
   const resetForm = () => {
     setFirstName("");
     setLastName("");

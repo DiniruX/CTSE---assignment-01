@@ -10,7 +10,6 @@ import { TouchableOpacity } from "react-native";
 import UserListNavigationStack from "../Components/UserList";
 import RequestNavigationStack from "../Components/Incident";
 
-
 const Tabs = () => {
   const authContext = useContext(AuthContext);
 
@@ -55,6 +54,19 @@ const Tabs = () => {
               ),
             }}
           />
+          <Tab.Screen
+            name="Incident"
+            component={RequestNavigationStack}
+            options={{
+              tabBarIcon: ({ focused }) => (
+                <Icon
+                  name="warning"
+                  color={focused ? "#000000" : "#585858"}
+                  iconStyle={{ marginRight: 10 }}
+                />
+              ),
+            }}
+          />
           {authContext.userType == "Admin" ? (
             <Tab.Screen
               name="Admin"
@@ -62,7 +74,7 @@ const Tabs = () => {
               options={{
                 tabBarIcon: ({ focused }) => (
                   <Icon
-                    name="people"
+                    name="contacts"
                     color={focused ? "red" : "black"}
                     iconStyle={{ marginRight: 10, fontSize: 30 }}
                   />
@@ -76,24 +88,11 @@ const Tabs = () => {
             options={{
               tabBarIcon: ({ focused }) => (
                 <Icon
-                  name="group-add"
+                  name="person"
                   color={focused ? "red" : "black"}
                   iconStyle={{ marginRight: 10, fontSize: 30 }}
                 />
               ),
-            }}
-          />
-          <Tab.Screen
-            name="Incident"
-            component={RequestNavigationStack}
-            options={{
-            tabBarIcon: ({ focused }) => (
-              <Icon
-                name="warning"
-                color={focused ? "#000000" : "#585858"}
-                iconStyle={{ marginRight: 10 }}
-              />
-            ),
             }}
           />
           <Tab.Screen
@@ -140,7 +139,6 @@ const Tabs = () => {
         />
       )}
     </Tab.Navigator>
-
   );
 };
 

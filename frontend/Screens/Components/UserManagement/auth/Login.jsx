@@ -18,6 +18,10 @@ const Login = ({ navigation }) => {
 
   const authContext = useContext(AuthContext);
 
+  /**
+   * It takes the email and password from the user, sends it to the server, and if the server returns a
+   * response, it sets the userId and userType in the context and navigates to the next screen.
+   */
   const login = async (e) => {
     e.preventDefault();
     try {
@@ -27,7 +31,7 @@ const Login = ({ navigation }) => {
       };
 
       const result = await axios.post(
-        "http://192.168.1.10:8000/user/login",
+        "http://192.168.1.169:8000/user/login",
         loginData
       );
 

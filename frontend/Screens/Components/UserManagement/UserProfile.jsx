@@ -26,15 +26,32 @@ export default function UserProfile({ navigation, route }) {
     setConfirm(true);
   };
 
+  /**
+   * If the route.params is undefined, then logout. Otherwise, navigate to the UserList screen.
+   */
   const successAlert = (e) => {
     setSuccessShow(false);
-    logout();
+    setConfirm(false);
+    console.log(route.params);
+    if (route.params === undefined) {
+      logout();
+    } else {
+      navigation.navigate("UserList");
+    }
   };
 
+  /**
+   * It's an async function that uses the axios library to make a GET request to the backend server, and
+   * then sets the state of the user object to the response data.
+   */
   const getUserDetails = async (id) => {
     try {
       const result = await axios.get(
+<<<<<<< HEAD
         `http://192.168.1.10:8000/user/get/${id}`
+=======
+        `http://192.168.1.169:8000/user/get/${id}`
+>>>>>>> affef0f87e1433cf4e888a00f8b523523ace1d24
       );
       console.log(result.data);
       setUser(result?.data);
@@ -43,11 +60,15 @@ export default function UserProfile({ navigation, route }) {
     }
   };
 
+  /**
+   * If the user clicks the delete button, then try to delete the user from the database, if the user is
+   * deleted, then show a success message.
+   */
   const deleteUser = async (e) => {
     if (e) {
       try {
         const result = await axios.delete(
-          `http://192.168.1.10:8000/user/delete/${user._id}`
+          `http://192.168.1.169:8000/user/delete/${user._id}`
         );
         if (result?.status === 201) {
           setSuccessShow(true);
@@ -60,6 +81,7 @@ export default function UserProfile({ navigation, route }) {
     }
   };
 
+  /* It's an effect hook that runs when the component is mounted, and when the component is focused. */
   useEffect(() => {
     if (route.params === undefined) {
       getUserDetails(userId);
@@ -69,7 +91,7 @@ export default function UserProfile({ navigation, route }) {
   }, [isFocused]);
 
   return (
-    <ScrollView >
+    <ScrollView>
       <View style={styles.row}>
         {route.params !== undefined ? (
           <TouchableOpacity onPress={() => navigation.navigate("UserList")}>

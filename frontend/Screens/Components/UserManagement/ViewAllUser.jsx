@@ -16,9 +16,13 @@ export default function ViewAllUser({ navigation }) {
   const [searchQuery, setSearchQuery] = useState("");
   const isFocused = useIsFocused();
 
+/**
+ * It's an async function that uses axios to get data from a server, and then sets the state of the
+ * users variable to the data that was received.
+ */
   async function getUserData() {
     try {
-      await axios.get("http://192.168.1.10:8000/user/getAll").then((res) => {
+      await axios.get("http://192.168.1.169:8000/user/getAll").then((res) => {
         console.log(res.data);
         if (res.status === 200) {
           setUsers(res.data);
@@ -30,10 +34,12 @@ export default function ViewAllUser({ navigation }) {
     }
   }
 
+/* This is a React Hook that is used to run a function when the component is mounted. */
   useEffect(() => {
     getUserData();
   }, [isFocused]);
 
+/* Filtering the users based on the search query. */
   const filteredUsers = users.filter(
     (user) =>
       user.firstName.toLowerCase().includes(searchQuery?.toLowerCase()) ||

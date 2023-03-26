@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
   },
   noBtn: {
-    width: "200%",
+    width: "40%",
     borderRadius: 25,
     marginRight: 20,
     marginTop: 20,
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
   },
   yesBtn: {
-    width: "200%",
+    width: "40%",
     borderRadius: 25,
     marginTop: 20,
     height: 50,
