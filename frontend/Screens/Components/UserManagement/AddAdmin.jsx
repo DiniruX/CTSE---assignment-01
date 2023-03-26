@@ -19,20 +19,36 @@ export default function AddAdmin({ navigation }) {
   const [password, setPassword] = useState("");
   const [passwordVerify, setPasswordVerify] = useState("");
 
+ /**
+  * It's a function that takes an event as an argument, and then it prevents the default action of the
+  * event, and then it checks if any of the fields are null, and if they are, it alerts the user to
+  * fill all fields, and if they aren't, it creates a variable called RegisterData, and then it tries
+  * to post the data to the server, and if it succeeds, it alerts the user that the data was
+  * successfully posted, and if it fails, it alerts the user that the data was not successfully posted.
+  * @returns {
+  *   "Message": "User Added Successfully",
+  *   "User": {
+  *     "id": "5e9f8f8f8f8f8f8f8f8f8f8f",
+  *     "firstName": "test",
+  *     "lastName": "test",
+  *     "email": "test@test.com
+  */
   const addAdmin = async (e) => {
     e.preventDefault();
-     if (
-       firstName == null ||
-       lastName == null ||
-       email == null ||
-       mobile == null ||
-       address == null ||
-       password == null ||
-       passwordVerify == null
-     ) {
-       alert("Please fill all fields");
-       return;
-     }
+    /* It's checking if any of the fields are null, and if they are, it alerts the user to fill all
+    fields. */
+    if (
+      firstName == null ||
+      lastName == null ||
+      email == null ||
+      mobile == null ||
+      address == null ||
+      password == null ||
+      passwordVerify == null
+    ) {
+      alert("Please fill all fields");
+      return;
+    }
     try {
       const RegisterData = {
         firstName: firstName,
@@ -44,7 +60,7 @@ export default function AddAdmin({ navigation }) {
       };
 
       const result = await axios.post(
-        "http://localhost:8000/user/add",
+        "http://192.168.1.169:8000/user/add",
         RegisterData
       );
       console.log(result);
@@ -59,6 +75,9 @@ export default function AddAdmin({ navigation }) {
     }
   };
 
+/**
+ * "resetForm" is a function that sets the state of all the form fields to an empty string.
+ */
   const resetForm = () => {
     setFirstName("");
     setLastName("");
@@ -204,7 +223,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "black",
     borderRadius: 25,
-    height: "89%",
+    height: "80%",
   },
   label: {
     fontWeight: "bold",
